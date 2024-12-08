@@ -32,16 +32,15 @@ class TestGenerator:
     
     def get_components(self) -> list[Component]:
         return self.__components
-        
-
-if __name__ == "__main__":
+    
+def main ():
     sol = Component("1014", "102.0.0.4", "8012")
     comp_1 = Component("1015", "102.0.0.5", "8013")
     comp_2 = Component("1016", "102.0.0.6", "8014")
     star_uuid = "11111111122222222222223333333332"
     generator = TestGenerator(star_uuid, sol, [comp_1, comp_2])
-    
-    # Add all test creators
+        
+    # Add your creator here like below
     HeartBeatTestCreator(generator)
     RegisterTestCreator(generator)
     CompStatusTestCreator(generator)
@@ -49,3 +48,7 @@ if __name__ == "__main__":
     
     
     generator.export_all()
+        
+
+if __name__ == "__main__":
+    main()
