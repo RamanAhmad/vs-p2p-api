@@ -47,9 +47,9 @@ class BaseTestCreator(ABC):
             
     
     def get_file_name(self) -> str:
-        if not hasattr(self, 'FILE_NAME'):
-            raise NotImplementedError("Subclasses must define FILE_NAME.")
-        return self.FILE_NAME
+        if not hasattr(self, 'TEST_NAME'):
+            raise NotImplementedError("Subclasses must define TEST_NAME.")
+        return self.TEST_NAME
     
     def get_headers(self) -> list[str]:
         if not hasattr(self, 'HEADERS'):

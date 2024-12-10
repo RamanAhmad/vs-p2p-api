@@ -6,7 +6,7 @@ from star.Component import Component
 # This class is responsible for creating the test cases for the DELETE unregister component endpoint
 class DeleteCompTestCreator(BaseTestCreator):
     
-    FILE_NAME = "DEL_unregister_from_sol"
+    TEST_NAME = "DEL_unregister_from_sol"
     
     HEADERS = [
         ColumnName.STAR_1_UUID,

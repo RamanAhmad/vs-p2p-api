@@ -7,7 +7,7 @@ from star.Component import Component
 # This class is responsible for creating the test cases for the POST register component endpoint
 class RegisterTestCreator(BaseTestCreator):
     
-    FILE_NAME = "POST_register"
+    TEST_NAME = "POST_register"
     
     HEADERS = [
         ColumnName.STAR_1_UUID,

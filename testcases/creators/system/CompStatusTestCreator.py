@@ -7,7 +7,7 @@ from star.Component import Component
 # This class is responsible for creating the test cases for the GET status of component endpoint
 class CompStatusTestCreator(BaseTestCreator):
     
-    FILE_NAME = "GET_status"
+    TEST_NAME = "GET_status"
     
     HEADERS = [
         ColumnName.STAR_1_UUID,

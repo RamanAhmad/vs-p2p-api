@@ -7,7 +7,7 @@ from star.Component import Component
 # This class is responsible for creating the test cases for the PATCH heartbeat endpoint
 class HeartBeatTestCreator(BaseTestCreator):
     
-    FILE_NAME = "PATCH_heartbeat"
+    TEST_NAME = "PATCH_heartbeat"
     
     HEADERS = [
         ColumnName.COM_PATH,
