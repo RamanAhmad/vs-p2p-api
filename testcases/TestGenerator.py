@@ -1,4 +1,5 @@
 from creators.TestCase import TestCase
+from creators.system.RegisterTestCreator import RegisterTestCreator
 from creators.system.DeleteCompTestCreator import DeleteCompTestCreator
 from creators.system.HeartBeatTestCreator import HeartBeatTestCreator
 from creators.system.CompStatusTestCreator import CompStatusTestCreator
@@ -53,9 +54,11 @@ def main ():
     generator = TestGenerator(star_uuid, sol, [comp_1, comp_2])
         
     # Add your creators here like below
+    RegisterTestCreator(generator)
     HeartBeatTestCreator(generator)
     CompStatusTestCreator(generator)
     DeleteCompTestCreator(generator)
+    
     
     
     generator.export_to_csv()
