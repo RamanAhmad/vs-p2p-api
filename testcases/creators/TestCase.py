@@ -1,4 +1,3 @@
-from enum import Enum
 from http import HTTPStatus
 from ColumnName import ColumnName
 from star.Component import Component
@@ -9,7 +8,7 @@ class TestCase:
     def __init__(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_1: Component = None, com_2: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):
         if not test_name or not case_desc or not expected_status or test_name.strip() == "" or case_desc.strip() == "":
             raise ValueError("expected status, test name and case description cannot be None, empty or only whitespaces")
-        self.__test_case: dict[Enum, object] = {column_name: None for column_name in ColumnName}
+        self.__test_case: dict[ColumnName, object] = {column_name: None for column_name in ColumnName}
         self.__init_values(test_name, case_desc, expected_status, star_uuid, sol, com_1, com_2, com_path, status, base_host, base_port)
         
         
@@ -29,7 +28,7 @@ class TestCase:
         if com_1:
             self.__set_component_values(com_1, 1)
         if com_2:
-            self.__set_component_values(com_1, 2)
+            self.__set_component_values(com_2, 2)
         if com_path:
             self.set_value(ColumnName.COM_PATH, com_path)
         if status:
@@ -59,19 +58,19 @@ class TestCase:
             self.set_value(port_col, component.get_port())
     
     
-    def get_test_case(self) -> dict[Enum, object]:
+    def get_test_case(self) -> dict[ColumnName, object]:
         return self.__test_case
     
-    def set_value(self, column: Enum, value: object):
+    def set_value(self, column: ColumnName, value: object):
         self.__check_column(column)
         self.__check_value(value)
         self.__test_case[column] = value
         
-    def get_value(self, column_name: Enum) -> object:
+    def get_value(self, column_name: ColumnName) -> object:
         self.__check_column(column_name)
         return self.__test_case[column_name]
     
-    def __check_column(self, column_name: Enum):
+    def __check_column(self, column_name: ColumnName):
         if column_name not in self.__test_case:
             raise ValueError(f"Column {column_name} is not a valid column name")
         
