@@ -1,7 +1,6 @@
+from creators.TestCase import TestCase
 from ..BaseTestCreator import BaseTestCreator
 from typing import Type
-from ColumnName import ColumnName
-from star.Component import Component
 
 # This class is responsible for creating the test cases for the DELETE unregister component endpoint
 class DeleteCompTestCreator(BaseTestCreator):
@@ -10,14 +9,14 @@ class DeleteCompTestCreator(BaseTestCreator):
     
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
         super().__init__(generator)
-        self.__component_1: Component = self.get_components()[0]
         
     
-    def get_test_cases(self) -> list[list]:
+    def _init_test_cases(self):
         star_uuid = self.get_star_uuid()
-        com_uuid = self.__component_1.get_uuid()
+        com = self.get_components()[1]
+        sol = self.get_sol()
         
         test_cases = [
-            [star_uuid, com_uuid, 401, "Invalid ip"]
+            TestCase(test_name=self.get_test_name(), case_desc="valid unregister request from component", com_path=com.get_uuid(), star_uuid=star_uuid, base_host=sol.get_ip(), base_port=sol.get_port(), expected_status=200)
         ]
-        return test_cases
+        self.add_test_cases(test_cases)

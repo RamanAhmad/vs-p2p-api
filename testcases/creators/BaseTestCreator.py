@@ -1,36 +1,15 @@
-from os import makedirs
-from os.path import join, isdir, exists
-import http
 from abc import ABC, abstractmethod
 from typing import Type
 from star.Component import Component
-from ColumnName import ColumnName
+from .TestCase import TestCase
 
 class BaseTestCreator(ABC):
-    VALID_STATUS_CODES = {code.value for code in http.HTTPStatus}
-    BASE_DIR: str = "out/test_cases"
-    HEADERS: list[ColumnName] = [
-        ColumnName.TEST_NAME,
-        ColumnName.TEST_CASE,
-        ColumnName.EXPECTED_STATUS,
-        ColumnName.STATUS,
-        ColumnName.STAR_1_UUID,
-        ColumnName.SOL_1_UUID,
-        ColumnName.SOL_1_IP,
-        ColumnName.SOL_1_PORT,
-        ColumnName.COM_1_UUID,
-        ColumnName.COM_1_IP,
-        ColumnName.COM_1_TCP,
-        ColumnName.COM_2_UUID,
-        ColumnName.COM_2_IP,
-        ColumnName.COM_2_TCP,
-        ColumnName.COM_PATH,
-    ]
-    
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
         self.__generator: Type['TestGenerator'] = generator # type: ignore
+        self.__test_cases: list[TestCase] = []
+        self._init_test_cases()
         generator.add(self)
-    
+        
     def get_star_uuid(self) -> str:
         return self.__generator.get_star_uuid()
 
@@ -44,47 +23,26 @@ class BaseTestCreator(ABC):
         return self.__generator.get_components()
         
     def print_test_cases(self):
-        print(self.get_headers())
         for test_case in self.get_test_cases():
             print(test_case)
-            
-    def get_status(self) -> int:
-        if not hasattr(self, '_status'):
-            raise NotImplementedError("Subclasses must define _status.")
-        return self._status
-            
-    def export_to_csv(self):
-        if not exists(BaseTestCreator.BASE_DIR) or not isdir(BaseTestCreator.BASE_DIR):
-            makedirs(BaseTestCreator.BASE_DIR)
-        file_name = self.get_test_name() if self.get_test_name().endswith(".csv") else self.get_test_name() + ".csv"
-        file_path = join(BaseTestCreator.BASE_DIR, file_name)
-        with open(file_path, "w") as file:
-            file.write(",".join(self.get_headers()) + "\n")
-            for test_case in self.get_test_cases():
-                file.write(",".join(f'"{item}"' if isinstance(item, str) else str(item) for item in test_case) + "\n")
-            
     
     def get_test_name(self) -> str:
         if not hasattr(self, 'TEST_NAME'):
             raise NotImplementedError("Subclasses must define TEST_NAME.")
         return self.TEST_NAME
     
-    def get_headers(self) -> list[str]:
-        if not hasattr(self, 'HEADERS'):
-            raise NotImplementedError("Subclasses must define HEADERS.")
-        return [header.value for header in self.HEADERS]
+    def get_test_cases(self) -> list[TestCase]:
+        return self.__test_cases
+    
+    def add_test_case(self, test_case: TestCase):
+        if not test_case.is_empty():
+            self.__test_cases.append(test_case)
+            
+    def add_test_cases(self, test_cases: list[TestCase]):
+        for test_case in test_cases:
+            self.add_test_case(test_case)
             
     @abstractmethod
-    def get_test_cases(self) -> list[list]:
+    def _init_test_cases(self):
         pass
-    
-    
-    
-        
-    @staticmethod
-    def _check_response_code(status: str):
-        if not status.isdigit():
-            raise ValueError("Status code must be a number.")
-        if int(status) not in BaseTestCreator.VALID_STATUS_CODES:
-            raise ValueError("Status code must be a valid HTTP status code.")
-    
+                

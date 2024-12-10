@@ -3,6 +3,8 @@ import re
 
 class Component:
     def __init__(self, uuid: str, ip: str = None, port: str = None):
+        if not uuid:
+            raise ValueError("UUID cannot be None, empty or only whitespaces.")
         Component.__check_com_uuid(uuid)
         self.__uuid: int = int(uuid)
         
@@ -34,6 +36,28 @@ class Component:
     
     def get_star_uuid(self) -> str:
         return self.__star_uuid
+    
+    def has_ip(self) -> bool:
+        return self.__ip is not None
+    
+    def has_port(self) -> bool:
+        return self.__port is not None
+    
+    
+    def get_modified_clone(self, new_uuid: int = None, new_ip: str = None, new_tcp: int = None) -> 'Component':
+        if new_uuid is None:
+            new_uuid = self.__uuid
+        if new_ip is None:
+            new_ip = self.__ip
+        else:
+            Component.__check_ip(new_ip)
+        if new_tcp is None:
+            new_tcp = self.__port
+        else:
+            Component.__check_port(new_tcp)
+        return Component(str(new_uuid), str(new_ip) if new_ip else None, str(new_tcp) if new_tcp else None)
+    
+    
          
     @staticmethod
     def __check_com_uuid(uuid: str):
