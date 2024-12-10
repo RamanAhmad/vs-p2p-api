@@ -56,7 +56,7 @@ class BaseTestCreator(ABC):
     def export_to_csv(self):
         if not exists(BaseTestCreator.BASE_DIR) or not isdir(BaseTestCreator.BASE_DIR):
             makedirs(BaseTestCreator.BASE_DIR)
-        file_name = self.get_file_name() if self.get_file_name().endswith(".csv") else self.get_file_name() + ".csv"
+        file_name = self.get_test_name() if self.get_test_name().endswith(".csv") else self.get_test_name() + ".csv"
         file_path = join(BaseTestCreator.BASE_DIR, file_name)
         with open(file_path, "w") as file:
             file.write(",".join(self.get_headers()) + "\n")
@@ -64,7 +64,7 @@ class BaseTestCreator(ABC):
                 file.write(",".join(f'"{item}"' if isinstance(item, str) else str(item) for item in test_case) + "\n")
             
     
-    def get_file_name(self) -> str:
+    def get_test_name(self) -> str:
         if not hasattr(self, 'TEST_NAME'):
             raise NotImplementedError("Subclasses must define TEST_NAME.")
         return self.TEST_NAME
