@@ -4,10 +4,28 @@ import http
 from abc import ABC, abstractmethod
 from typing import Type
 from star.Component import Component
+from ColumnName import ColumnName
 
 class BaseTestCreator(ABC):
     VALID_STATUS_CODES = {code.value for code in http.HTTPStatus}
     BASE_DIR: str = "out/test_cases"
+    HEADERS: list[ColumnName] = [
+        ColumnName.TEST_NAME,
+        ColumnName.TEST_CASE,
+        ColumnName.EXPECTED_STATUS,
+        ColumnName.STATUS,
+        ColumnName.STAR_1_UUID,
+        ColumnName.SOL_1_UUID,
+        ColumnName.SOL_1_IP,
+        ColumnName.SOL_1_PORT,
+        ColumnName.COM_1_UUID,
+        ColumnName.COM_1_IP,
+        ColumnName.COM_1_TCP,
+        ColumnName.COM_2_UUID,
+        ColumnName.COM_2_IP,
+        ColumnName.COM_2_TCP,
+        ColumnName.COM_PATH,
+    ]
     
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
         self.__generator: Type['TestGenerator'] = generator # type: ignore

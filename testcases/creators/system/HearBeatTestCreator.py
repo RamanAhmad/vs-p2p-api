@@ -9,18 +9,6 @@ class HeartBeatTestCreator(BaseTestCreator):
     
     TEST_NAME = "PATCH_heartbeat"
     
-    HEADERS = [
-        ColumnName.COM_PATH,
-        ColumnName.STAR_1_UUID,
-        ColumnName.SOL_1_UUID,
-        ColumnName.COM_1_UUID,
-        ColumnName.COM_1_IP,
-        ColumnName.COM_1_TCP,
-        ColumnName.STATUS,
-        ColumnName.EXPECTED_STATUS,
-        ColumnName.TEST_NAME
-    ]
-    
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
         super().__init__(generator)
         self.__component_1: Component = self.get_components()[0]
