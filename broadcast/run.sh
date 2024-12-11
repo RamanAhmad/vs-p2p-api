@@ -4,9 +4,9 @@ udpPort="$1"
 echo selected udp port is $udpPort
 subnet=$(docker network inspect bridge --format='{{(index .IPAM.Config 0).Subnet}}')
 echo dockers bridge subnet is $subnet
-broadcast=$(python3 src/subnet_to_broadcast.py $subnet)
+broadcast=$(python3 broadcast/src/subnet_to_broadcast.py $subnet)
 echo dockers broadcast address is $broadcast
-docker build --rm --tag broadcast ./
+docker build --rm --tag broadcast ./broadcast
 imageId=$(docker image ls --filter "reference=broadcast:*latest*" --format "{{.ID}}")
 echo imageId is $imageId
 docker run $imageId $broadcast $udpPort

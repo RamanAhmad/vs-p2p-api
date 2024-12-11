@@ -1,3 +1,5 @@
+import json
+from sys import argv
 from creators.TestCase import TestCase
 from creators.system.RegisterTestCreator import RegisterTestCreator
 from creators.system.DeleteCompTestCreator import DeleteCompTestCreator
@@ -47,19 +49,51 @@ class TestGenerator:
                     file.write(",".join(f'"{item}"' if isinstance(item, str) else (str(item) if item is not None else '') for item in test_case) + "\n")
     
 def main ():
-    sol = Component("1014", "102.0.0.4", "8012")
-    comp_1 = Component("1015", "102.0.0.5", "8013")
-    comp_2 = Component("1016", "102.0.0.6", "8014")
-    star_uuid = "11111111122222222222223333333332"
+    sol_tcp = 8000
+    try:        
+        environment_path = argv[1]
+        with open(environment_path) as file:
+            environment = json.loads(file)
+            values = environment["values"]
+            for entry in values:
+                if entry["key"] == "STAR_1_UUID":
+                    star_uuid = entry["value"]
+                elif entry["key"] == "SOL_1_UUID":
+                    sol_uuid = entry["value"]
+                elif entry["key"] == "SOL_1_IP":
+                    sol_ip = entry["value"]
+                elif entry["key"] == "SOL_1_UUID":
+                    sol_uuid = entry["value"]
+                elif entry["key"] == "SOL_1_TCP":
+                    sol_tcp == entry["value"]
+                elif entry["key"] == "COM_1_UUID":
+                    com_1_uuid = entry["value"]
+                elif entry["key"] == "COM_1_IP":
+                    com_1_ip = entry["value"]
+                elif entry["key"] == "COM_2_UUID":
+                    com_2_uuid = entry["value"]
+                elif entry["key"] == "COM_2_IP":
+                    com_2_ip = entry["value"]
+                    
+            sol = Component(sol_uuid,sol_ip, sol_tcp)
+            comp_1 = Component(com_1_uuid,com_1_ip,sol_tcp)     
+            comp_2 = Component(com_2_uuid, com_2_ip, sol_tcp)
+           
+            
+    except:
+        print("No valid environment file path given, using default values")        
+        sol = Component("1014", "102.0.0.4", "8012")
+        comp_1 = Component("1015", "102.0.0.5", "8013")
+        star_uuid = "11111111122222222222223333333332"    
+        comp_2 = Component("1016", "102.0.0.6", "8014")
+
     generator = TestGenerator(star_uuid, sol, [comp_1, comp_2])
         
     # Add your creators here like below
     RegisterTestCreator(generator)
     HeartBeatTestCreator(generator)
     CompStatusTestCreator(generator)
-    DeleteCompTestCreator(generator)
-    
-    
+    DeleteCompTestCreator(generator)    
     
     generator.export_to_csv()
         
