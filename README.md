@@ -20,7 +20,7 @@ Hier werden drei verschiedene Methoden beschrieben, wie man die API testen kann:
   - Öffne Postman
   - Klicke im oberen linken Bereich auf *Import*
   - Wähle im Pop-up-Fenster File aus
-  - Wähle die Datei [Peer2Peer_API_Collection.json](p2p-postman-collection\Peer2Peer_API_Collection.json) aus und klicke auf *Open*
+  - Wähle die Datei [Peer2Peer_API_Collection.json](vs-p2p-api\p2p-postman-collection) aus und klicke auf *Open*
 
 
 ### Einrichten von Umgebungsvariablen
