@@ -65,6 +65,7 @@ def write_values_to_environment_file(values):
             elif key.lower() == "sol-ip":
                 environment_values = insertValue(environment_values,"SOL_1_IP",value)
             elif key.lower() == "sol-tcp":
+                environment_values = insertValue(environment_values,"port",value)
                 environment_values = insertValue(environment_values,"SOL_1_TCP",str(value))
             environment_values.append({"key":key, "value":value, "type":"default", "enabled":True})
         environment["values"] = environment_values

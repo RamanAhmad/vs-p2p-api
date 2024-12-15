@@ -1,11 +1,14 @@
 import json
+import os
 from sys import argv
+import sys
 from creators.TestCase import TestCase
 from creators.system.RegisterTestCreator import RegisterTestCreator
 from creators.system.DeleteCompTestCreator import DeleteCompTestCreator
 from creators.system.HeartBeatTestCreator import HeartBeatTestCreator
 from creators.system.CompStatusTestCreator import CompStatusTestCreator
 from star.Component import Component
+from pathlib import Path
 
 from typing import Type
 from os import makedirs
@@ -49,13 +52,16 @@ class TestGenerator:
                     file.write(",".join(f'"{item}"' if isinstance(item, str) else (str(item) if item is not None else '') for item in test_case) + "\n")
     
 def main ():
-    sol_tcp = 8000
     try:        
-        environment_path = argv[1]
-        with open(environment_path) as file:
-            environment = json.loads(file)
+        
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), argv[1])
+        print(file_path)
+
+        with open(file_path) as file:
+            environment = json.loads(file.read())
             values = environment["values"]
             for entry in values:
+                print(entry)
                 if entry["key"] == "STAR_1_UUID":
                     star_uuid = entry["value"]
                 elif entry["key"] == "SOL_1_UUID":
@@ -65,7 +71,7 @@ def main ():
                 elif entry["key"] == "SOL_1_UUID":
                     sol_uuid = entry["value"]
                 elif entry["key"] == "SOL_1_TCP":
-                    sol_tcp == entry["value"]
+                    sol_tcp = entry["value"]
                 elif entry["key"] == "COM_1_UUID":
                     com_1_uuid = entry["value"]
                 elif entry["key"] == "COM_1_IP":
@@ -75,12 +81,15 @@ def main ():
                 elif entry["key"] == "COM_2_IP":
                     com_2_ip = entry["value"]
                     
-            sol = Component(sol_uuid,sol_ip, sol_tcp)
-            comp_1 = Component(com_1_uuid,com_1_ip,sol_tcp)     
-            comp_2 = Component(com_2_uuid, com_2_ip, sol_tcp)
+            sol = Component(sol_uuid,sol_ip, str(sol_tcp))
+            comp_1 = Component(com_1_uuid,com_1_ip,str(sol_tcp))     
+            comp_2 = Component(com_2_uuid, com_2_ip, str(sol_tcp))
            
             
-    except:
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(e, exc_type, fname, exc_tb.tb_lineno)
         print("No valid environment file path given, using default values")        
         sol = Component("1014", "102.0.0.4", "8012")
         comp_1 = Component("1015", "102.0.0.5", "8013")
