@@ -1,0 +1,1578 @@
+13:36:06,329 __main__ INFO Sending HELLO? on 172.18.0.100:8013
+13:36:07,329 __main__ INFO Received message from ('172.18.0.2', 8013): {"star":"9F26840D02EBED841DE3755FF6225524","sol":"3038","component":"8682","sol-ip":"172.18.0.2","sol-tcp":"8013"}
+13:36:07,333 __main__ INFO Finished Broadcast
+14:36:08,591 __main__ INFO Reading environment file: G:\Studium\HAW\VS\vs-p2p-api\testcases\test_environment.postman_environment.json
+14:36:08,606 __main__ INFO Successfully generated csv test cases
+newman
+
+Peer2Peer API
+
+Iteration 1/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 30ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/8682?star=9F26840D02EBED841DE3755FF6225524 [409 Conflict, 129B, 5ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 5ms]
+  1. Valid response status code
+  2. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 6ms]
+  3. Valid response status code
+  4. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  5. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  6. Content Type is application/json
+  7⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+  8. Status code is 200
+
+Iteration 2/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 6ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/4711?star=9F26840D02EBED841DE3755FF6225524 [409 Conflict, 129B, 5ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 5ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  9. Valid response status code
+ 10. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 6ms]
+ 11. Valid response status code
+ 12. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+ 13. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 14. Content Type is application/json
+ 15⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 5ms]
+ 16. Status code is 200
+
+Iteration 3/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/8682?star=9F26840D02EBED841DE3755FF6225524 [409 Conflict, 129B, 3ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 17. Valid response status code
+ 18. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 5ms]
+ 19. Valid response status code
+ 20. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+ 21. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 22. Content Type is application/json
+ 23⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 24. Status code is 200
+
+Iteration 4/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/8682?star=9F26840D02EBED841DE3755FF6225524 [409 Conflict, 129B, 4ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+ 25. Valid response status code
+ 26. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 27. Valid response status code
+ 28. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+ 29. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 2ms]
+  ✓  Valid response status code
+ 30. Content Type is application/json
+ 31⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 32. Status code is 200
+
+Iteration 5/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/8682?star=ABCD [409 Conflict, 129B, 3ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 33. Valid response status code
+ 34. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 35. Valid response status code
+ 36. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 37. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 38. Content Type is application/json
+ 39⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 40. Status code is 200
+
+Iteration 6/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/8682?star=9F26840D02EBED841DE3755FF6225524 [409 Conflict, 129B, 2ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 41. Valid response status code
+ 42. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 43. Valid response status code
+ 44. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 45. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 2ms]
+  ✓  Valid response status code
+ 46. Content Type is application/json
+ 47⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 48. Status code is 200
+
+Iteration 7/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 5ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 49. Valid response status code
+ 50. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 51. Valid response status code
+ 52. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+ 53. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 54. Content Type is application/json
+ 55⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 56. Status code is 200
+
+Iteration 8/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 2ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 57. Valid response status code
+ 58. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 59. Valid response status code
+ 60. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+ 61. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+ 62. Content Type is application/json
+ 63⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 64. Status code is 200
+
+Iteration 9/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 65. Valid response status code
+ 66. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 67. Valid response status code
+ 68. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 69. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 70. Content Type is application/json
+ 71⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 72. Status code is 200
+
+Iteration 10/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+ 73. Valid response status code
+ 74. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 75. Valid response status code
+ 76. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 77. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 2ms]
+  ✓  Valid response status code
+ 78. Content Type is application/json
+ 79⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 80. Status code is 200
+
+Iteration 11/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 2ms]
+ 81. Valid response status code
+ 82. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 83. Valid response status code
+ 84. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 85. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 86. Content Type is application/json
+ 87⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 88. Status code is 200
+
+Iteration 12/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=ABCD [401 Unauthorized, 133B, 5ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 11ms]
+ 89. Valid response status code
+ 90. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 4ms]
+ 91. Valid response status code
+ 92. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 93. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+ 94. Content Type is application/json
+ 95⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 3ms]
+ 96. Status code is 200
+
+Iteration 13/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 104B, 3ms]
+ 97. Valid response status code
+ 98. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 5ms]
+ 99. Valid response status code
+100. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+101. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 2ms]
+  ✓  Valid response status code
+102. Content Type is application/json
+103⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 3ms]
+104. Status code is 200
+
+Iteration 14/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.100:8013/vs/v1/system/ [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+106. Valid response status code
+107. Response body is empty
+
+↳ get component status
+  GET 172.18.0.100:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+109. Valid response status code
+110. Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.100:8013/vs/v1/system/:com-uuid [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+112. Valid response status code
+113. Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.100:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+115. Valid response status code
+116. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.100:8013/vs/v1/messages/<MSG-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+118. Valid response status code
+119. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.100:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+121. Valid response status code
+122. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.100:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+124. Valid response status code
+125. Content Type is application/json
+126⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.100:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+128. Status code is 200
+
+Iteration 15/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.100:8013/vs/v1/system/ [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+130. Valid response status code
+131. Response body is empty
+
+↳ get component status
+  GET 172.18.0.100:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+133. Valid response status code
+134. Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.100:8013/vs/v1/system/:com-uuid [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+136. Valid response status code
+137. Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.100:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+139. Valid response status code
+140. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.100:8013/vs/v1/messages/<MSG-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+142. Valid response status code
+143. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.100:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+145. Valid response status code
+146. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.100:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+148. Valid response status code
+149. Content Type is application/json
+150⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.100:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [errored]
+     connect ECONNREFUSED 172.18.0.100:8013
+152. Status code is 200
+
+Iteration 16/16
+
+❏ system
+↳ register with sol
+  POST 172.18.0.2:8013/vs/v1/system/ [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ get component status
+  GET 172.18.0.2:8013/vs/v1/system/?star=9F26840D02EBED841DE3755FF6225524 [401 Unauthorized, 133B, 2ms]
+  ✓  Valid response status code
+  ✓  Body is empty is response if code != OK
+
+↳ send heart beat
+  PATCH 172.18.0.2:8013/vs/v1/system/:com-uuid [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+  ✓  Response body is empty
+
+↳ unregister component
+  DELETE 172.18.0.2:8013/vs/v1/system/<COM-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 2ms]
+153. Valid response status code
+154. Content Type is text/plain
+
+❏ messages
+↳ create message
+  POST 172.18.0.2:8013/vs/v1/messages/<MSG-UUID> [405 Method Not Allowed, 322B, 3ms]
+155. Valid response status code
+156. Content Type is text/plain
+
+↳ delete message
+  DELETE 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [401 Unauthorized, 133B, 4ms]
+  ✓  Valid response status code
+157. Content Type is text/plain
+
+↳ get all
+  GET 172.18.0.2:8013/vs/v1/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO> [401 Unauthorized, 133B, 3ms]
+  ✓  Valid response status code
+158. Content Type is application/json
+159⠄ JSONError in test-script
+
+↳ get message by id
+  GET 172.18.0.2:8013/vs/v1/messages/<MSG-UUID>?star=<STAR-UUID> [405 Method Not Allowed, 322B, 3ms]
+160. Status code is 200
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │              16 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │             128 │              16 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │             256 │              16 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │             160 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │             240 │             128 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 4.2s                                    │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 3.56kB (approx)                        │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 3ms [min: 2ms, max: 30ms, s.d.: 2ms] │
+└─────────────────────────────────────────────────────────────┘
+
+    #  failure         detail                                                                                                                                                                             
+                                                                                                                                                                                                          
+ 001.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 1    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 002.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 1    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 003.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 1    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 004.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 1    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 005.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 1    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 006.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 1    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 007.  JSONError                                                                                                                                                                                          
+       iteration: 1    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 008.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 1    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 009.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 2    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 010.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 2    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 011.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 2    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 012.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 2    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 013.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 2    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 014.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 2    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 015.  JSONError                                                                                                                                                                                          
+       iteration: 2    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 016.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 2    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 017.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 3    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 018.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 3    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 019.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 3    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 020.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 3    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 021.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 3    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 022.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 3    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 023.  JSONError                                                                                                                                                                                          
+       iteration: 3    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 024.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 3    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 025.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 4    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 026.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 4    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 027.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 4    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 028.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 4    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 029.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 4    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 030.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 4    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 031.  JSONError                                                                                                                                                                                          
+       iteration: 4    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 032.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 4    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 033.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 5    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 034.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 5    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 035.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 5    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 036.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 5    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 037.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 5    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 038.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 5    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 039.  JSONError                                                                                                                                                                                          
+       iteration: 5    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 040.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 5    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 041.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 6    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 042.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 6    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 043.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 6    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 044.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 6    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 045.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 6    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 046.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 6    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 047.  JSONError                                                                                                                                                                                          
+       iteration: 6    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 048.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 6    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 049.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 7    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 050.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 7    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 051.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 7    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 052.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 7    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 053.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 7    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 054.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 7    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 055.  JSONError                                                                                                                                                                                          
+       iteration: 7    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 056.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 7    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 057.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 8    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 058.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 8    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 059.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 8    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 060.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 8    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 061.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 8    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 062.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 8    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 063.  JSONError                                                                                                                                                                                          
+       iteration: 8    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 064.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 8    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 065.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 9    expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 066.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 9    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 067.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 9    expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 068.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 9    expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 069.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 9    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 070.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 9    the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 071.  JSONError                                                                                                                                                                                          
+       iteration: 9    No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 072.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 9    expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 073.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 10   expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 074.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 10   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 075.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 10   expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 076.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 10   expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 077.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 10   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 078.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 10   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 079.  JSONError                                                                                                                                                                                          
+       iteration: 10   No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 080.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 10   expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 081.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 11   expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 082.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 11   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 083.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 11   expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 084.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 11   expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 085.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 11   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 086.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 11   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 087.  JSONError                                                                                                                                                                                          
+       iteration: 11   No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 088.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 11   expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 089.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 12   expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 090.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 12   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 091.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 12   expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 092.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 12   expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 093.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 12   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 094.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 12   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 095.  JSONError                                                                                                                                                                                          
+       iteration: 12   No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 096.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 12   expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 097.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 13   expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 098.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 13   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 099.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 13   expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 100.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 13   expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 101.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 13   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 102.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 13   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 103.  JSONError                                                                                                                                                                                          
+       iteration: 13   No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 104.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 13   expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 105.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 106.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 401, 403, 409 ] to include undefined                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / register with sol"                                                                                                                                                
+                                                                                                                                                                                                          
+ 107.  AssertionError  Response body is empty                                                                                                                                                             
+       iteration: 14   .empty was passed non-string primitive undefined                                                                                                                                   
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / register with sol"                                                                                                                                                
+                                                                                                                                                                                                          
+ 108.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 109.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 401, 409 ] to include undefined                                                                                                                                    
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / get component status"                                                                                                                                             
+                                                                                                                                                                                                          
+ 110.  AssertionError  Body is empty is response if code != OK                                                                                                                                            
+       iteration: 14   .empty was passed non-string primitive undefined                                                                                                                                   
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / get component status"                                                                                                                                             
+                                                                                                                                                                                                          
+ 111.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 112.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 401, 404, 409 ] to include undefined                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / send heart beat"                                                                                                                                                  
+                                                                                                                                                                                                          
+ 113.  AssertionError  Response body is empty                                                                                                                                                             
+       iteration: 14   .empty was passed non-string primitive undefined                                                                                                                                   
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / send heart beat"                                                                                                                                                  
+                                                                                                                                                                                                          
+ 114.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 115.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 404 ] to include undefined                                                                                                                                         
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 116.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 14   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 117.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 118.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 401, 404, 412 ] to include undefined                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 119.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 14   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 120.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 121.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 401, 404 ] to include undefined                                                                                                                                    
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 122.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 14   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 123.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 124.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 14   expected [ 200, 401 ] to include undefined                                                                                                                                         
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 125.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 14   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 126.  JSONError                                                                                                                                                                                          
+       iteration: 14   Unexpected token u in JSON at position 0                                                                                                                                           
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 127.  Error                                                                                                                                                                                              
+       iteration: 14   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 128.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 14   expected PostmanResponse{ …(5) } to have property 'code'                                                                                                                           
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 129.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 130.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 401, 403, 409 ] to include undefined                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / register with sol"                                                                                                                                                
+                                                                                                                                                                                                          
+ 131.  AssertionError  Response body is empty                                                                                                                                                             
+       iteration: 15   .empty was passed non-string primitive undefined                                                                                                                                   
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / register with sol"                                                                                                                                                
+                                                                                                                                                                                                          
+ 132.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 133.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 401, 409 ] to include undefined                                                                                                                                    
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / get component status"                                                                                                                                             
+                                                                                                                                                                                                          
+ 134.  AssertionError  Body is empty is response if code != OK                                                                                                                                            
+       iteration: 15   .empty was passed non-string primitive undefined                                                                                                                                   
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / get component status"                                                                                                                                             
+                                                                                                                                                                                                          
+ 135.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 136.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 401, 404, 409 ] to include undefined                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / send heart beat"                                                                                                                                                  
+                                                                                                                                                                                                          
+ 137.  AssertionError  Response body is empty                                                                                                                                                             
+       iteration: 15   .empty was passed non-string primitive undefined                                                                                                                                   
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / send heart beat"                                                                                                                                                  
+                                                                                                                                                                                                          
+ 138.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 139.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 404 ] to include undefined                                                                                                                                         
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 140.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 15   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 141.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 142.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 401, 404, 412 ] to include undefined                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 143.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 15   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 144.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 145.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 401, 404 ] to include undefined                                                                                                                                    
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 146.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 15   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 147.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 148.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 15   expected [ 200, 401 ] to include undefined                                                                                                                                         
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 149.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 15   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 150.  JSONError                                                                                                                                                                                          
+       iteration: 15   Unexpected token u in JSON at position 0                                                                                                                                           
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 151.  Error                                                                                                                                                                                              
+       iteration: 15   connect ECONNREFUSED 172.18.0.100:8013                                                                                                                                             
+                       at request                                                                                                                                                                         
+                       inside ""                                                                                                                                                                          
+                                                                                                                                                                                                          
+ 152.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 15   expected PostmanResponse{ …(5) } to have property 'code'                                                                                                                           
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              
+                                                                                                                                                                                                          
+ 153.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 16   expected [ 200, 404 ] to include 401                                                                                                                                               
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 154.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 16   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "system / unregister component"                                                                                                                                             
+                                                                                                                                                                                                          
+ 155.  AssertionError  Valid response status code                                                                                                                                                         
+       iteration: 16   expected [ 200, 401, 404, 412 ] to include 405                                                                                                                                     
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 156.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 16   expected 'application/json' to include 'text/plain'                                                                                                                                
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / create message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 157.  AssertionError  Content Type is text/plain                                                                                                                                                         
+       iteration: 16   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / delete message"                                                                                                                                                 
+                                                                                                                                                                                                          
+ 158.  AssertionError  Content Type is application/json                                                                                                                                                   
+       iteration: 16   the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string 
+                       at assertion:1 in test-script                                                                                                                                                      
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 159.  JSONError                                                                                                                                                                                          
+       iteration: 16   No data, empty input at 1:1                                                                                                                                                        
+                                                                                                                                                                                                          
+                       ^                                                                                                                                                                                  
+                       at test-script                                                                                                                                                                     
+                       inside "messages / get all"                                                                                                                                                        
+                                                                                                                                                                                                          
+ 160.  AssertionError  Status code is 200                                                                                                                                                                 
+       iteration: 16   expected response to have status code 200 but got 405                                                                                                                              
+                       at assertion:0 in test-script                                                                                                                                                      
+                       inside "messages / get message by id"                                                                                                                                              

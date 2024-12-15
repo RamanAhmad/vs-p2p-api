@@ -7,5 +7,6 @@ RUN npm install -g newman
 COPY p2p-postman-collection ./
 COPY out/test_cases ./
 COPY testcases/test_environment.postman_environment.json ./ 
-COPY test_run.sh ./
-CMD ["./test_run.sh"]
+COPY run_test.sh ./
+COPY output.log ./
+CMD ["./run_test.sh"]

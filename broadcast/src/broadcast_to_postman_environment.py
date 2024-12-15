@@ -14,21 +14,21 @@ def get_module_logger(mod_name):
     To use this, do logger = get_module_logger(__name__)
     """
     logger = logging.getLogger(mod_name)
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter(
-        '%(asctime)s [%(name)-12s] %(levelname)-8s %(message)s')
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG)
+    logging.basicConfig(filename="output.log",
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.DEBUG)
     return logger  
 
 logger = get_module_logger(__name__)
+
             
 def send_and_receive_broadcast():
     interfaces = socket.getaddrinfo(host=socket.gethostname(), port=None, family=socket.AF_INET)
     allips = [ip[-1][0] for ip in interfaces]
     for ip in set(allips):
-        logger.info(f'sending on {ip}:{port}')
+        logger.info(f'Sending HELLO? on {ip}:{port}')
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)  # UDP
         sock.settimeout(5.0)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -37,24 +37,25 @@ def send_and_receive_broadcast():
         sleep(1)
         data, addr = sock.recvfrom(1024)
         data = data.decode()
-        logger.info(f"received message from %s: %s" %(addr,data))
+        logger.info(f"Received message from %s: %s" %(addr,data))
         if data and data != "HELLO?":
-            write_environment(data)
+            write_environment(data, ip)
             sock.close()
             return True
         sock.close()
     return False
 
-def write_environment(response):
+def write_environment(response, own_ip):
     values = json.loads(response)
-    result = write_values_to_environment_file(values)
+    result = write_values_to_environment_file(values, own_ip)
     with open(file, 'w') as fp:
         json.dump(result, fp, indent=2)
     
-def write_values_to_environment_file(values):
+def write_values_to_environment_file(values, own_ip):
     with open(file) as json_file:
         environment = json.load(json_file)
         environment_values = environment["values"]
+        environment_values = insertValue(environment_values, "COM_1_IP", own_ip)
         for key, value in values.items():
             if key.lower() == "star":
                 environment_values = insertValue(environment_values,"STAR_1_UUID",value)
@@ -62,6 +63,7 @@ def write_values_to_environment_file(values):
                 environment_values = insertValue(environment_values,"SOL_1_UUID",value)
             elif key.lower() == "component":
                 environment_values = insertValue(environment_values,"COM_1_UUID",value)
+                environment_values = insertValue(environment_values,"COM_2_UUID",value)
             elif key.lower() == "sol-ip":
                 environment_values = insertValue(environment_values,"SOL_1_IP",value)
             elif key.lower() == "sol-tcp":
@@ -81,15 +83,15 @@ if __name__ == "__main__":
     try:
         broadcast_ip = sys.argv[1]
     except:
-        logger.warning(f'no broadcast ip specified, using {broadcast_ip}')        
+        logger.warning(f'No broadcast ip specified, using {broadcast_ip}')        
         
     try:
         port = int(sys.argv[2])
     except:
-        logger.warning(f'no broadcast port specified, using {port}')             
+        logger.warning(f'No broadcast port specified, using {port}')             
     
     isSuccess = send_and_receive_broadcast()    
-    logger.info('Finish')  
+    logger.info('Finished Broadcast')  
     if not isSuccess:
         logger.warning('Failed')
 

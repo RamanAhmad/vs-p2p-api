@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from sys import argv
 import sys
@@ -13,6 +14,20 @@ from pathlib import Path
 from typing import Type
 from os import makedirs
 from os.path import join, isdir, exists
+
+def get_module_logger(mod_name):
+    """
+    To use this, do logger = get_module_logger(__name__)
+    """
+    logger = logging.getLogger(mod_name)
+    logging.basicConfig(filename="output.log",
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.DEBUG)
+    return logger  
+
+logger = get_module_logger(__name__)
 
 class TestGenerator:
     BASE_DIR: str = "out/test_cases"
@@ -55,10 +70,10 @@ def main ():
     try:        
         
         file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), argv[1])
-        print(file_path)
 
         with open(file_path) as file:
             environment = json.loads(file.read())
+            logger.info("Reading environment file: " + file_path)
             values = environment["values"]
             for entry in values:
                 print(entry)
@@ -89,8 +104,8 @@ def main ():
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        print(e, exc_type, fname, exc_tb.tb_lineno)
-        print("No valid environment file path given, using default values")        
+        logger.warning(e, exc_type, fname, exc_tb.tb_lineno)
+        logger.warning("No valid environment file path given, using default values")        
         sol = Component("1014", "102.0.0.4", "8012")
         comp_1 = Component("1015", "102.0.0.5", "8013")
         star_uuid = "11111111122222222222223333333332"    
@@ -104,8 +119,8 @@ def main ():
     CompStatusTestCreator(generator)
     DeleteCompTestCreator(generator)    
     
-    generator.export_to_csv()
-        
+    generator.export_to_csv() 
+    logger.info("Successfully generated csv test cases")       
 
 if __name__ == "__main__":
     main()
