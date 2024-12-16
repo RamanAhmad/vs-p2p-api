@@ -15,7 +15,7 @@ def get_module_logger(mod_name):
     """
     logger = logging.getLogger(mod_name)
     logging.basicConfig(filename="output.log",
-                    filemode='a',
+                    filemode='w',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
                     level=logging.DEBUG)
