@@ -5,17 +5,17 @@ from star.Component import Component
 
 class TestCase:
     VALID_STATUS_CODES = {code.value for code in HTTPStatus}
-    def __init__(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):
+    def __init__(self, test_name: str, case_desc: str, expected_status, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path = None, status = None, base_host: str = None, base_port: int = None):
         if not test_name or not case_desc or not expected_status or test_name.strip() == "" or case_desc.strip() == "":
             raise ValueError("expected status, test name and case description cannot be None, empty or only whitespaces")
         self.__test_case: dict[ColumnName, object] = {column_name: None for column_name in ColumnName}
         self.__init_values(test_name, case_desc, expected_status, star_uuid, sol, com_self, com_other, com_path, status, base_host, base_port)
         
         
-    def __init_values(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):  
+    def __init_values(self, test_name: str, case_desc: str, expected_status, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path = None, status = None, base_host: str = None, base_port: int = None):  
         self.set_value(ColumnName.TEST_NAME, test_name)
         self.set_value(ColumnName.CASE_DESC, case_desc)
-        TestCase._check_response_code(str(expected_status))
+        TestCase._check_response_code(expected_status)
         self.set_value(ColumnName.EXPECTED_STATUS, expected_status)
         if base_host:
             self.set_value(ColumnName.BASE_HOST, base_host)
@@ -32,7 +32,7 @@ class TestCase:
         if com_path:
             self.set_value(ColumnName.COM_PATH, com_path)
         if status:
-            TestCase._check_response_code(str(status))
+            TestCase._check_response_code(status)
             self.set_value(ColumnName.STATUS, status)
         
         
@@ -96,8 +96,8 @@ class TestCase:
         return ", ".join(str(value) for value in self)
     
     @staticmethod
-    def _check_response_code(status: str):
-        if not status.isdigit():
+    def _check_response_code(status):
+        if not str(status).isdigit():
             raise ValueError("Status code must be a number.")
         if int(status) not in TestCase.VALID_STATUS_CODES:
             raise ValueError("Status code must be a valid HTTP status code.")

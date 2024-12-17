@@ -9,7 +9,6 @@ from creators.system.DeleteCompTestCreator import DeleteCompTestCreator
 from creators.system.HeartBeatTestCreator import HeartBeatTestCreator
 from creators.system.CompStatusTestCreator import CompStatusTestCreator
 from star.Component import Component
-from pathlib import Path
 
 from typing import Type
 from os import makedirs
@@ -100,9 +99,9 @@ def main ():
                 elif entry["key"] == "COM_OTHER_TCP":
                     com_other_tcp = entry["value"]
                     
-            sol = Component(sol_uuid,sol_ip, str(sol_tcp))
-            comp_self = Component(com_self_uuid,com_self_ip, str(com_self_tcp))
-            comp_other = Component(com_other_uuid, com_other_ip, str(com_other_tcp))
+            sol = Component(sol_uuid, sol_ip, sol_tcp)
+            comp_self = Component(com_self_uuid,com_self_ip, com_self_tcp)
+            comp_other = Component(com_other_uuid, com_other_ip, com_other_tcp)
            
             
     except Exception as e:
