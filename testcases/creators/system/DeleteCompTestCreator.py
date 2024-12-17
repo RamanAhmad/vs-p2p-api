@@ -1,9 +1,9 @@
 from creators.TestCase import TestCase
-from ..BaseTestCreator import BaseTestCreator
+from ..BaseTestCreator import BaseTestCreator as BTC
 from typing import Type
 
 # This class is responsible for creating the test cases for the DELETE unregister component endpoint
-class DeleteCompTestCreator(BaseTestCreator):
+class DeleteCompTestCreator(BTC):
     
     TEST_NAME = "DEL_unregister_from_sol"
     

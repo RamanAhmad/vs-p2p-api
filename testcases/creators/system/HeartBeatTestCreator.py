@@ -1,11 +1,11 @@
 from creators.TestCase import TestCase
-from ..BaseTestCreator import BaseTestCreator
+from ..BaseTestCreator import BaseTestCreator as BTC
 from typing import Type
 from star.Component import Component
 
 
 # This class is responsible for creating the test cases for the PATCH heartbeat endpoint
-class HeartBeatTestCreator(BaseTestCreator):
+class HeartBeatTestCreator(BTC):
     
     TEST_NAME = "PATCH_heartbeat"
     
@@ -20,11 +20,11 @@ class HeartBeatTestCreator(BaseTestCreator):
         
         test_cases = [
             TestCase(test_name=name, case_desc="Only valid json data", expected_status=200, star_uuid=star_uuid, sol=sol, com_self=com, com_path=com.get_uuid() , status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=name, case_desc="Unknown COM_UUID in path", expected_status=404, star_uuid=star_uuid, sol=sol, com_self=com, com_path=4711 , status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=name, case_desc="Mismatching COM_UUID in json path", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com.get_modified_clone(new_uuid=4711), com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=name, case_desc="Mismatching IP in json path", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com.get_modified_clone(new_ip="4.7.1.1"), com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=name, case_desc="Status in json is not 200", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com, com_path=com.get_uuid(), status=505, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=name, case_desc="Unknown STAR_UUD in json data", expected_status=401, star_uuid="ABCD", sol=sol, com_self=com, com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=name, case_desc="Mismatching SOL_UUID in json data", expected_status=401, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=4711), com_self=com, com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port())
+            TestCase(test_name=name, case_desc="Unknown COM_UUID in path", expected_status=404, star_uuid=star_uuid, sol=sol, com_self=com, com_path=BTC.FAKE_UUID , status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=name, case_desc="Mismatching COM_UUID in json path", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=name, case_desc="Mismatching IP in json path", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com.get_modified_clone(new_ip=BTC.FAKE_IP), com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=name, case_desc="Status in json is not 200", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com, com_path=com.get_uuid(), status=BTC.FAKE_STATUS, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=name, case_desc="Unknown STAR_UUD in json data", expected_status=401, star_uuid=BTC.FAKE_STAR_UUID, sol=sol, com_self=com, com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=name, case_desc="Mismatching SOL_UUID in json data", expected_status=401, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_self=com, com_path=com.get_uuid(), status=200, base_host=sol.get_ip(), base_port=sol.get_port())
         ]
         self.add_test_cases(test_cases)
