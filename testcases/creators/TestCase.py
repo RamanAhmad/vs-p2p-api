@@ -35,9 +35,9 @@ class TestCase:
         elif sol:
             self.set_value(ColumnName.BASE_HOST, sol.get_ip())
         if base_port:
-            self.set_value(ColumnName.BASE_PORT, base_port)
+            self.set_value(ColumnName.BASE_PORT, int(base_port))
         elif sol:
-            self.set_value(ColumnName.BASE_PORT, sol.get_port())
+            self.set_value(ColumnName.BASE_PORT, int(sol.get_port()))
         
         
     # This method sets the values of the columns related to the component.
