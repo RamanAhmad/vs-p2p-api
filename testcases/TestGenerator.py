@@ -95,23 +95,27 @@ def main ():
                     com_other_uuid = entry["value"]
                 elif entry["key"] == "COM_OTHER_IP":
                     com_other_ip = entry["value"]
+                elif entry["key"] == "COM_SELF_TCP":
+                    com_self_tcp = entry["value"]
+                elif entry["key"] == "COM_OTHER_TCP":
+                    com_other_tcp = entry["value"]
                     
             sol = Component(sol_uuid,sol_ip, str(sol_tcp))
-            comp_1 = Component(com_self_uuid,com_self_ip,str(sol_tcp))
-            comp_2 = Component(com_other_uuid, com_other_ip, str(sol_tcp))
+            comp_self = Component(com_self_uuid,com_self_ip, str(com_self_tcp))
+            comp_other = Component(com_other_uuid, com_other_ip, str(com_other_tcp))
            
             
     except Exception as e:
-        exc_type, exc_obj, exc_tb = sys.exc_info()
+        exc_type, _, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         logger.warning(e, exc_type, fname, exc_tb.tb_lineno)
         logger.warning("No valid environment file path given, using default values")        
         sol = Component("1014", "102.0.0.4", "8012")
-        comp_1 = Component("1015", "102.0.0.5", "8013")
+        comp_self = Component("1015", "102.0.0.5", "8013")
         star_uuid = "11111111122222222222223333333332"    
-        comp_2 = Component("1016", "102.0.0.6", "8014")
+        comp_other = Component("1016", "102.0.0.6", "8014")
 
-    generator = TestGenerator(star_uuid, sol, [comp_1, comp_2])
+    generator = TestGenerator(star_uuid, sol, [comp_self, comp_other])
         
     # Add your creators here like below
     RegisterTestCreator(generator)
