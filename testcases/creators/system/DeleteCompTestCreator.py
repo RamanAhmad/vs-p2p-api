@@ -5,7 +5,7 @@ from typing import Type
 # This class is responsible for creating the test cases for the DELETE unregister component endpoint
 class DeleteCompTestCreator(BTC):
     
-    TEST_NAME = "DEL_unregister_from_sol"
+    TEST_NAME = "DEL_unregister_component"
     
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
         super().__init__(generator)
