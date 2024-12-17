@@ -5,14 +5,14 @@ from star.Component import Component
 
 class TestCase:
     VALID_STATUS_CODES = {code.value for code in HTTPStatus}
-    def __init__(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_1: Component = None, com_2: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):
+    def __init__(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):
         if not test_name or not case_desc or not expected_status or test_name.strip() == "" or case_desc.strip() == "":
             raise ValueError("expected status, test name and case description cannot be None, empty or only whitespaces")
         self.__test_case: dict[ColumnName, object] = {column_name: None for column_name in ColumnName}
-        self.__init_values(test_name, case_desc, expected_status, star_uuid, sol, com_1, com_2, com_path, status, base_host, base_port)
+        self.__init_values(test_name, case_desc, expected_status, star_uuid, sol, com_self, com_other, com_path, status, base_host, base_port)
         
         
-    def __init_values(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_1: Component = None, com_2: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):  
+    def __init_values(self, test_name: str, case_desc: str, expected_status: int, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path: int = None, status: int = None, base_host: str = None, base_port: int = None):  
         self.set_value(ColumnName.TEST_NAME, test_name)
         self.set_value(ColumnName.CASE_DESC, case_desc)
         TestCase._check_response_code(str(expected_status))
@@ -22,13 +22,13 @@ class TestCase:
         if base_port:
             self.set_value(ColumnName.BASE_PORT, base_port)
         if star_uuid:
-            self.set_value(ColumnName.STAR_1_UUID, star_uuid)
+            self.set_value(ColumnName.STAR_UUID, star_uuid)
         if sol:
             self.__set_component_values(sol)
-        if com_1:
-            self.__set_component_values(com_1, 1)
-        if com_2:
-            self.__set_component_values(com_2, 2)
+        if com_self:
+            self.__set_component_values(com_self, 1)
+        if com_other:
+            self.__set_component_values(com_other, 2)
         if com_path:
             self.set_value(ColumnName.COM_PATH, com_path)
         if status:
@@ -44,9 +44,9 @@ class TestCase:
             raise ValueError("COM number must be 0, 1 or 2")
         
         column_map = {
-            0: (ColumnName.SOL_1_UUID, ColumnName.SOL_1_IP, ColumnName.SOL_1_PORT),
-            1: (ColumnName.COM_1_UUID, ColumnName.COM_1_IP, ColumnName.COM_1_TCP),
-            2: (ColumnName.COM_2_UUID, ColumnName.COM_2_IP, ColumnName.COM_2_TCP)
+            0: (ColumnName.SOL_UUID, ColumnName.SOL_IP, ColumnName.SOL_PORT),
+            1: (ColumnName.COM_SELF_UUID, ColumnName.COM_SELF_IP, ColumnName.COM_SELF_TCP),
+            2: (ColumnName.COM_OTHER_UUID, ColumnName.COM_OTHER_IP, ColumnName.COM_OTHER_TCP)
         }
         
         uuid_col, ip_col, port_col = column_map[com_number]

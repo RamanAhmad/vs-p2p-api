@@ -29,12 +29,16 @@ Hier werden drei verschiedene Methoden beschrieben, wie man die API testen kann:
 Für das manuelle Testen müssen die Umgebungsvariablen in Postman eingerichtet werden. Diese Variablen werden in den API-Anfragen verwendet, um dynamische Werte zu ersetzen, z.B. die UUIDs von Komponenten, IP-Adressen und etc.
 
 **Umgebungsvariablen:**
-- `COM_1_UUID`: UUID der ersten Komponente
-- `COM_2_UUID`: UUID der zweiten Komponente
-- `STAR_1_UUID`: UUID des Stars
-- `COM_1_IP`: IP-Adresse der ersten Komponente
-- `COM_2_IP`: IP-Adresse der zweiten Komponente
-- `COM_2_TCP`: TCP-Port der zweiten Komponente
+- `COM_SELF_UUID`: UUID der gefakten Postman-Komponente
+- `COM_OTHER_UUID`: UUID der zweiten, echten Komponente
+- `STAR_UUID`: UUID des Stars
+- `SOL_UUID`: UUID der SOL-Komponente
+- `COM_SELF_IP`: IP-Adresse der gefakten Postman-Komponente
+- `COM_OTHER_IP`: IP-Adresse der zweiten, echten Komponente
+- `SOL_IP`: IP-Adresse der SOL-Komponente
+- `COM_SELF_TCP`: TCP-Port der gefakten Postman-Komponente
+- `COM_OTHER_TCP`: TCP-Port der zweiten, echten Komponente
+- `SOL_TCP`: TCP-Port der SOL-Komponente
 - `STATUS_OK`: Erfolgreicher Statuscode
 
 

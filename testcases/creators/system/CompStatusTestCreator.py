@@ -14,13 +14,12 @@ class CompStatusTestCreator(BaseTestCreator):
     
     def _init_test_cases(self):
         star_uuid = self.get_star_uuid()
-        com_1: Component = self.get_components()[0]
-        com_1_uuid = com_1.get_uuid()
+        com_self: Component = self.get_components()[0]
         self.get_components()[0]
         
         test_cases = [
-            TestCase(test_name=self.get_test_name(), case_desc="Valid and active component", expected_status=200, com_path=com_1_uuid, star_uuid=star_uuid, base_host=com_1.get_ip(), base_port=com_1.get_port()),
-            TestCase(test_name=self.get_test_name(), case_desc="Component not part of the star", expected_status=401, com_path=4711, star_uuid=star_uuid, base_host=com_1.get_ip(), base_port=com_1.get_port())
+            TestCase(test_name=self.get_test_name(), case_desc="Valid and active component", expected_status=200, com_path=com_self.get_uuid(), star_uuid=star_uuid, base_host=com_self.get_ip(), base_port=com_self.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Component not part of the star", expected_status=401, com_path=4711, star_uuid=star_uuid, base_host=com_self.get_ip(), base_port=com_self.get_port())
         ]
         
         self.add_test_cases(test_cases)

@@ -48,7 +48,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"star\": \"{{STAR_1_UUID}}\",\r\n    \"sol\": \"{{SOL_1_UUID}}\",\r\n    \"component\": \"{{COM_2_UUID}}\",\r\n    \"com-ip\": \"{{COM_2_IP}}\",\r\n    \"com-tcp\": \"{{COM_2_TCP}}\",\r\n    \"status\": \"{{OK}}\"\r\n}",
+							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_OTHER_UUID}}\",\r\n    \"com-ip\": \"{{COM_OTHER_IP}}\",\r\n    \"com-tcp\": \"{{COM_OTHER_TCP}}\",\r\n    \"status\": \"{{OK}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -158,7 +158,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/system/:com_uuid?star={{STAR_1_UUID}}",
+							"raw": "{{base_url}}/system/:com_uuid?star={{STAR_UUID}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -169,13 +169,13 @@
 							"query": [
 								{
 									"key": "star",
-									"value": "{{STAR_1_UUID}}"
+									"value": "{{STAR_UUID}}"
 								}
 							],
 							"variable": [
 								{
 									"key": "com_uuid",
-									"value": "{{COM_1_UUID}}"
+									"value": "{{COM_SELF_UUID}}"
 								}
 							]
 						},
@@ -235,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"star\": \"{{STAR_1_UUID}}\",\r\n    \"sol\": \"{{SOL_1_UUID}}\",\r\n    \"component\": \"{{COM_1_UUID}}\",\r\n    \"com-ip\": \"{{COM_1_IP}}\",\r\n    \"com-tcp\": \"{{COM_1_TCP}}\",\r\n    \"status\": \"{{STATUS}}\"\r\n}",
+							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_SELF_UUID}}\",\r\n    \"com-ip\": \"{{COM_SELF_IP}}\",\r\n    \"com-tcp\": \"{{COM_SELF_TCP}}\",\r\n    \"status\": \"{{STATUS}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

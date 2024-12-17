@@ -18,11 +18,11 @@ class RegisterTestCreator(BaseTestCreator):
         com = self.get_components()[1]
 
         test_cases = [
-            TestCase(test_name=self.get_test_name(), case_desc="Only valid json data", expected_status=200, star_uuid=star_uuid, sol=sol, com_2=com, status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=self.get_test_name(), case_desc="Mismatching COM_UUID in json data", expected_status=409, star_uuid=star_uuid, sol=sol, com_2=com.get_modified_clone(new_uuid=4711), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=self.get_test_name(), case_desc="Mismatching IP for given COM_UUID", expected_status=409, star_uuid=star_uuid, sol=sol, com_2=com.get_modified_clone(new_ip="4.7.1.1"), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=self.get_test_name(), case_desc="Status in json is not 200", expected_status=409, star_uuid=star_uuid, sol=sol, com_2=com, status=500, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=self.get_test_name(), case_desc="Unknown STAR_UUID in json", expected_status=401, star_uuid="ABCD", sol=sol, com_2=com, status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
-            TestCase(test_name=self.get_test_name(), case_desc="Mismatching SOL_UUID in json", expected_status=200, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=4711), com_2=com, status=200, base_host=sol.get_ip(), base_port=sol.get_port())
+            TestCase(test_name=self.get_test_name(), case_desc="Only valid json data", expected_status=200, star_uuid=star_uuid, sol=sol, com_other=com, status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Mismatching COM_UUID in json data", expected_status=409, star_uuid=star_uuid, sol=sol, com_other=com.get_modified_clone(new_uuid=4711), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Mismatching IP for given COM_UUID", expected_status=409, star_uuid=star_uuid, sol=sol, com_other=com.get_modified_clone(new_ip="4.7.1.1"), status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Status in json is not 200", expected_status=409, star_uuid=star_uuid, sol=sol, com_other=com, status=500, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Unknown STAR_UUID in json", expected_status=401, star_uuid="ABCD", sol=sol, com_other=com, status=200, base_host=sol.get_ip(), base_port=sol.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Mismatching SOL_UUID in json", expected_status=200, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=4711), com_other=com, status=200, base_host=sol.get_ip(), base_port=sol.get_port())
         ]
         self.add_test_cases(test_cases)

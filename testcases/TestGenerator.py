@@ -77,28 +77,28 @@ def main ():
             values = environment["values"]
             for entry in values:
                 print(entry)
-                if entry["key"] == "STAR_1_UUID":
+                if entry["key"] == "STAR_UUID":
                     star_uuid = entry["value"]
-                elif entry["key"] == "SOL_1_UUID":
+                elif entry["key"] == "SOL_UUID":
                     sol_uuid = entry["value"]
-                elif entry["key"] == "SOL_1_IP":
+                elif entry["key"] == "SOL_IP":
                     sol_ip = entry["value"]
-                elif entry["key"] == "SOL_1_UUID":
+                elif entry["key"] == "SOL_UUID":
                     sol_uuid = entry["value"]
-                elif entry["key"] == "SOL_1_TCP":
+                elif entry["key"] == "SOL_TCP":
                     sol_tcp = entry["value"]
-                elif entry["key"] == "COM_1_UUID":
-                    com_1_uuid = entry["value"]
-                elif entry["key"] == "COM_1_IP":
-                    com_1_ip = entry["value"]
-                elif entry["key"] == "COM_2_UUID":
-                    com_2_uuid = entry["value"]
-                elif entry["key"] == "COM_2_IP":
-                    com_2_ip = entry["value"]
+                elif entry["key"] == "COM_SELF_UUID":
+                    com_self_uuid = entry["value"]
+                elif entry["key"] == "COM_SELF_IP":
+                    com_self_ip = entry["value"]
+                elif entry["key"] == "COM_OTHER_UUID":
+                    com_other_uuid = entry["value"]
+                elif entry["key"] == "COM_OTHER_IP":
+                    com_other_ip = entry["value"]
                     
             sol = Component(sol_uuid,sol_ip, str(sol_tcp))
-            comp_1 = Component(com_1_uuid,com_1_ip,str(sol_tcp))     
-            comp_2 = Component(com_2_uuid, com_2_ip, str(sol_tcp))
+            comp_1 = Component(com_self_uuid,com_self_ip,str(sol_tcp))
+            comp_2 = Component(com_other_uuid, com_other_ip, str(sol_tcp))
            
             
     except Exception as e:

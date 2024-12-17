@@ -55,20 +55,20 @@ def write_values_to_environment_file(values, own_ip):
     with open(file) as json_file:
         environment = json.load(json_file)
         environment_values = environment["values"]
-        environment_values = insertValue(environment_values, "COM_1_IP", own_ip)
+        environment_values = insertValue(environment_values, "COM_SELF_IP", own_ip)
         for key, value in values.items():
             if key.lower() == "star":
-                environment_values = insertValue(environment_values,"STAR_1_UUID",value)
+                environment_values = insertValue(environment_values,"STAR_UUID",value)
             elif key.lower() == "sol":
-                environment_values = insertValue(environment_values,"SOL_1_UUID",value)
+                environment_values = insertValue(environment_values,"SOL_UUID",value)
             elif key.lower() == "component":
-                environment_values = insertValue(environment_values,"COM_1_UUID",value)
-                environment_values = insertValue(environment_values,"COM_2_UUID",value)
+                environment_values = insertValue(environment_values,"COM_SELF_UUID",value)
+                environment_values = insertValue(environment_values,"COM_OTHER_UUID",value)
             elif key.lower() == "sol-ip":
-                environment_values = insertValue(environment_values,"SOL_1_IP",value)
+                environment_values = insertValue(environment_values,"SOL_IP",value)
             elif key.lower() == "sol-tcp":
                 environment_values = insertValue(environment_values,"port",value)
-                environment_values = insertValue(environment_values,"SOL_1_TCP",str(value))
+                environment_values = insertValue(environment_values,"SOL_TCP",str(value))
             environment_values.append({"key":key, "value":value, "type":"default", "enabled":True})
         environment["values"] = environment_values
     return environment
