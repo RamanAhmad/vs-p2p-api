@@ -13,10 +13,15 @@ class DeleteCompTestCreator(BTC):
     
     def _init_test_cases(self):
         star_uuid = self.get_star_uuid()
-        com = self.get_components()[1]
+        com_self = self.get_components()[0]
+        com_other = self.get_components()[1]
         sol = self.get_sol()
         
         test_cases = [
-            TestCase(test_name=self.get_test_name(), case_desc="valid unregister request from component", com_path=com.get_uuid(), star_uuid=star_uuid, base_host=sol.get_ip(), base_port=sol.get_port(), expected_status=200)
+            TestCase(test_name=self.get_test_name(), case_desc="valid unregister request (comp -> sol)", com_path=com_self.get_uuid(), star_uuid=star_uuid, expected_status=200),
+            # TestCase(test_name=self.get_test_name(), case_desc="valid unregister request (sol -> comp)", com_path=com.get_uuid(), star_uuid=star_uuid, base_host=com_other.get_ip(), base_port=com_other.get_port(), expected_status=200)
+            TestCase(test_name=self.get_test_name(), case_desc="Unknown COM_UUID in path (comp -> sol)", com_path=BTC.FAKE_UUID, star_uuid=star_uuid, expected_status=404),
+            # TestCase(test_name=self.get_test_name(), case_desc="Unknown COM_UUID in path (sol -> comp)", com_path=BTC.FAKE_UUID, star_uuid=star_uuid, base_host=com_other.get_ip(), base_port=com_other.get_port(), expected_status=404),
+            TestCase(test_name=self.get_test_name(), case_desc="Invalid IP (comp -> sol)", com_path=com_other.get_uuid(), star_uuid=star_uuid, expected_status=401)
         ]
         self.add_test_cases(test_cases)
