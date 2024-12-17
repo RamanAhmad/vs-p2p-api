@@ -19,7 +19,7 @@ class HeartBeatTestCreator(BTC):
         name = self.get_test_name()
         
         test_cases = [
-            TestCase(test_name=name, case_desc="Only valid json data", expected_status=200, star_uuid=star_uuid, sol=sol, com_self=com_self, com_path=com_self.get_uuid() , status=200),
+            TestCase(test_name=name, case_desc="Only valid json data", expected_status=200, star_uuid=star_uuid, sol=sol, com_self=com_self, com_path=com_self.get_uuid(), status=200),
             TestCase(test_name=name, case_desc="Unknown COM_UUID in path", expected_status=404, star_uuid=star_uuid, sol=sol, com_self=com_self, com_path=BTC.FAKE_UUID , status=200),
             TestCase(test_name=name, case_desc="Mismatching COM_UUID in json path", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com_self.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_path=com_self.get_uuid(), status=200),
             TestCase(test_name=name, case_desc="Mismatching IP in json path", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com_self.get_modified_clone(new_ip=BTC.FAKE_IP), com_path=com_self.get_uuid(), status=200),
