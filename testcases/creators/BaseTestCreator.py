@@ -7,7 +7,7 @@ class BaseTestCreator(ABC):
     FAKE_IP = "4.7.1.1"
     FAKE_PORT = "4711"
     FAKE_UUID = "4711"
-    FAKE_STATUS = "200"
+    FAKE_STATUS = "500"
     FAKE_STAR_UUID = "ABCD"
     
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
