@@ -12,15 +12,11 @@ class TestCase:
         self.__init_values(test_name, case_desc, expected_status, star_uuid, sol, com_self, com_other, com_path, status, base_host, base_port)
         
         
-    def __init_values(self, test_name: str, case_desc: str, expected_status, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path = None, status = None, base_host: str = None, base_port: int = None):  
+    def __init_values(self, test_name: str, case_desc: str, expected_status, star_uuid: str = None, sol: Component = None, com_self: Component = None, com_other: Component = None, com_path = None, status = None, base_host: str = None, base_port: int = None):
         self.set_value(ColumnName.TEST_NAME, test_name)
         self.set_value(ColumnName.CASE_DESC, case_desc)
         TestCase._check_response_code(expected_status)
         self.set_value(ColumnName.EXPECTED_STATUS, expected_status)
-        if base_host:
-            self.set_value(ColumnName.BASE_HOST, base_host)
-        if base_port:
-            self.set_value(ColumnName.BASE_PORT, base_port)
         if star_uuid:
             self.set_value(ColumnName.STAR_UUID, star_uuid)
         if sol:
@@ -34,6 +30,14 @@ class TestCase:
         if status:
             TestCase._check_response_code(status)
             self.set_value(ColumnName.STATUS, status)
+        if base_host:
+            self.set_value(ColumnName.BASE_HOST, base_host)
+        elif sol:
+            self.set_value(ColumnName.BASE_HOST, sol.get_ip())
+        if base_port:
+            self.set_value(ColumnName.BASE_PORT, base_port)
+        elif sol:
+            self.set_value(ColumnName.BASE_PORT, sol.get_port())
         
         
     # This method sets the values of the columns related to the component.
