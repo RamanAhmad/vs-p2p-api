@@ -48,7 +48,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_OTHER_UUID}}\",\r\n    \"com-ip\": \"{{COM_OTHER_IP}}\",\r\n    \"com-tcp\": \"{{COM_OTHER_TCP}}\",\r\n    \"status\": \"{{OK}}\"\r\n}",
+							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_SELF_UUID}}\",\r\n    \"com-ip\": \"{{COM_SELF_IP}}\",\r\n    \"com-tcp\": \"{{COM_SELF_TCP}}\",\r\n    \"status\": \"{{OK}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -158,13 +158,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/system/:com_uuid?star={{STAR_UUID}}",
+							"raw": "{{base_url}}/system/:COM_UUID?star={{STAR_UUID}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"system",
-								":com_uuid"
+								":COM_UUID"
 							],
 							"query": [
 								{
@@ -174,8 +174,8 @@
 							],
 							"variable": [
 								{
-									"key": "com_uuid",
-									"value": "{{COM_SELF_UUID}}"
+									"key": "COM_UUID",
+									"value": "{{COM_PATH}}"
 								}
 							]
 						},
@@ -187,13 +187,23 @@
 					"name": "send heart beat",
 					"event": [
 						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"port\", \"5000\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
 							"listen": "test",
 							"script": {
 								"exec": [
+									"console.log(\"base_url: \" + pm.environment.get(\"base_url\"))\r",
 									"var status = pm.response.code;\r",
 									"var validStatus = [200, 401, 404, 409];\r",
 									"\r",
-									"console.log(\"base_url: \" + pm.environment.get(\"base_url\"))\r",
 									"if (pm.variables.has(\"CASE_DESC\") && pm.variables.get(\"CASE_DESC\").eql(\"PATCH_heartbeat\")) {\r",
 									"    pm.test(\"One of valid response status codes\", function (){\r",
 									"        pm.expect(validStatus).to.include(status);\r",
@@ -218,16 +228,6 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
 						}
 					],
 					"request": {
@@ -235,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_SELF_UUID}}\",\r\n    \"com-ip\": \"{{COM_SELF_IP}}\",\r\n    \"com-tcp\": \"{{COM_SELF_TCP}}\",\r\n    \"status\": \"{{STATUS}}\"\r\n}",
+							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_OTHER_UUID}}\",\r\n    \"com-ip\": \"{{COM_OTHER_IP}}\",\r\n    \"com-tcp\": \"{{COM_OTHER_TCP}}\",\r\n    \"status\": \"{{STATUS}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -272,6 +272,7 @@
 									"var status = pm.response.code;\r",
 									"var validStatus = [200, 404];\r",
 									"\r",
+									"\r",
 									"pm.test(\"Valid response status code\", function (){\r",
 									"    pm.expect(validStatus).to.include(status);\r",
 									"});\r",
@@ -284,70 +285,46 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/system/:com_uuid?star=<STAR-UUID>",
+							"raw": "{{base_url}}/system/:COM_UUID?star={{STAR_UUID}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"system",
-								":com_uuid"
+								":COM_UUID"
 							],
 							"query": [
 								{
 									"key": "star",
-									"value": "<STAR-UUID>"
+									"value": "{{STAR_UUID}}"
 								}
 							],
 							"variable": [
 								{
-									"key": "com_uuid",
-									"value": "<COM-UUID>"
+									"key": "COM_UUID",
+									"value": "{{COM_PATH}}"
 								}
 							]
 						},
 						"description": "### DELETE component from star\n\nThis endpoint allows a component to unregister itself from a star. It can also be used by SOL to remove a specific component.\n\n#### Path Variables\n\n- `COM-UUID`: COM-UUID of the component to be unregistered.\n    \n\n#### Request Parameters\n\n- `star`: STAR-UUID of the star.\n    \n\n#### Response\n\nThe response format is `text/plain`, where the text is always empty. If the request is being sent **from a component to SOL**, the following response codes are valid:\n\n- `200`: OK: Component successfully removed from the star.\n    \n- `401`: Unauthorized: Invalid IP of requesting component and/or unknown/wrong STAR-UUID.\n    \n- `404`: Not Found: Component not known by SOL.\n    \n\nIf instead the request is being sent from SOL to a component, these responses are valid:\n\n- `200`: OK: Component successfully removed from the star.\n    \n- `401`: Unauthorized: Invalid IP of requesting SOL and/or unknown/wrong STAR-UUID."
 					},
-					"response": [
-						{
-							"name": "unregister component",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{base_url}}/system/:com_uuid?star=AAACA378C7B66F361FCC4705D340AE0F",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"system",
-										":com_uuid"
-									],
-									"query": [
-										{
-											"key": "star",
-											"value": "AAACA378C7B66F361FCC4705D340AE0F"
-										}
-									],
-									"variable": [
-										{
-											"key": "com_uuid",
-											"value": "7370"
-										}
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
+					"response": []
 				}
 			]
 		},
