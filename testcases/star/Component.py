@@ -59,7 +59,7 @@ class Component:
     def __check_ip(ip: str):
         if ip is None:
             return
-        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
+        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip) and not str(ip).__eq__("localhost"):
             raise ValueError("IP must be a valid IPv4 address.")
         
     @staticmethod
