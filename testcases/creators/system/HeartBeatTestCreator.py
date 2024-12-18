@@ -1,3 +1,4 @@
+from util.TestTargetEnum import TestTarget
 from creators.TestCase import TestCase
 from ..BaseTestCreator import BaseTestCreator as BTC
 from typing import Type
@@ -28,3 +29,6 @@ class HeartBeatTestCreator(BTC):
             TestCase(test_name=name, case_desc="Mismatching SOL_UUID in json data", expected_status=401, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_self=com_self, com_path=com_self.get_uuid(), status=200)
         ]
         self.add_test_cases(test_cases)
+        
+    def runs_against(self) -> TestTarget:
+        return TestTarget.SOL

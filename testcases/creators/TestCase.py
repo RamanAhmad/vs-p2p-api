@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from ColumnName import ColumnName
+from util.ColumnNameEnum import ColumnName
 from star.Component import Component
 
 

@@ -1,3 +1,4 @@
+from util.TestTargetEnum import TestTarget
 from creators.TestCase import TestCase
 from ..BaseTestCreator import BaseTestCreator as BTC
 from typing import Type
@@ -25,3 +26,6 @@ class CompStatusTestCreator(BTC):
         ]
         
         self.add_test_cases(test_cases)
+        
+    def runs_against(self) -> TestTarget:
+        return TestTarget.COM_OTHER

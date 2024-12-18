@@ -1,3 +1,4 @@
+from util.TestTargetEnum import TestTarget
 from creators.TestCase import TestCase
 from ..BaseTestCreator import BaseTestCreator as BTC
 from typing import Type
@@ -26,3 +27,6 @@ class RegisterTestCreator(BTC):
             TestCase(test_name=self.get_test_name(), case_desc="Mismatching SOL_UUID in json", expected_status=200, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_self=com_self, status=200)
         ]
         self.add_test_cases(test_cases)
+        
+    def runs_against(self) -> TestTarget:
+        return TestTarget.SOL

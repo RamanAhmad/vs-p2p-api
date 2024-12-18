@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import Type
+from util.TestTargetEnum import TestTarget
 from star.Component import Component
 from .TestCase import TestCase
 
@@ -9,6 +11,8 @@ class BaseTestCreator(ABC):
     FAKE_UUID = "4711"
     FAKE_STATUS = "500"
     FAKE_STAR_UUID = "ABCD"
+    
+    # TODO: Add a way to identify wether the test runs against sol or com_other using an enum
     
     def __init__(self, generator: Type['TestGenerator']): # type: ignore
         self.__generator: Type['TestGenerator'] = generator # type: ignore
@@ -51,4 +55,13 @@ class BaseTestCreator(ABC):
     @abstractmethod
     def _init_test_cases(self):
         pass
-                
+    
+    
+    """
+    This method, `runs_against`, is intended to be overridden by subclasses
+    of `BaseTestCreator`. It should return an instance of `TestTarget`, which represents
+    the target that the test will run against. As of now, a target would be either SOL or COM_OTHER.
+    """
+    @abstractmethod
+    def runs_against(self) -> TestTarget:
+        pass

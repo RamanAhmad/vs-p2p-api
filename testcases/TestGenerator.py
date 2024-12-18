@@ -14,6 +14,8 @@ from typing import Type
 from os import makedirs
 from os.path import join, isdir, exists
 
+from util.TestTargetEnum import TestTarget
+
 def get_module_logger(mod_name):
     """
     To use this, do logger = get_module_logger(__name__)
@@ -54,11 +56,13 @@ class TestGenerator:
     def get_components(self) -> list[Component]:
         return self.__components
     
-    def export_to_csv(self):
-        creators = self.__creators
+    def export_to_csv(self, target: TestTarget = TestTarget.ALL):
+        creators = self.__creators if target == TestTarget.ALL else [creator for creator in self.__creators if creator.runs_against() == target]
         if not exists(TestGenerator.BASE_DIR) or not isdir(TestGenerator.BASE_DIR):
             makedirs(TestGenerator.BASE_DIR)
         file_path = join(TestGenerator.BASE_DIR, TestGenerator.FILE_NAME)
+        if target != TestTarget.ALL:
+            file_path = file_path.replace(".csv", f"_against_{target.value.lower()}.csv")
         with open(file_path, "w") as file:
             file.write(",".join(TestCase.get_column_names()) + "\n")
             for creator in creators:
@@ -114,23 +118,21 @@ def main ():
 
     generator = TestGenerator(star_uuid, sol, [comp_self, comp_other])
     
-    logger.info("Generating testcases for " + argv[2])
-        
-    # if (argv[2].strip().lower() == "sol"):
-    #     #only sol testcases
-    # elif (argv[2].strip().lower() == "com"):
-    #     #only com testcases
-    # else:
-    #     msg = "Specify test: \"sol\" or \"com\""
-    #     logger.warning(msg)
-    #     raise Exception(msg) 
+    logger.info("Generating testcases for " + argv[2]) 
     
     RegisterTestCreator(generator)
     HeartBeatTestCreator(generator)
     CompStatusTestCreator(generator)
     DeleteCompTestCreator(generator)
     
-    generator.export_to_csv() 
+    if (argv[2].strip().lower() == "sol"):
+        generator.export_to_csv(TestTarget.SOL)
+    elif (argv[2].strip().lower() == "com"):
+        generator.export_to_csv(TestTarget.COM_OTHER)
+    else:
+        msg = "Specify test: \"sol\" or \"com\""
+        logger.warning(msg)
+        raise Exception(msg)
     logger.info("Successfully generated csv test cases for " + argv[2])       
 
 if __name__ == "__main__":

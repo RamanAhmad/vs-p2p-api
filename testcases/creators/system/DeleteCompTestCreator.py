@@ -1,3 +1,4 @@
+from util.TestTargetEnum import TestTarget
 from creators.TestCase import TestCase
 from ..BaseTestCreator import BaseTestCreator as BTC
 from typing import Type
@@ -25,3 +26,7 @@ class DeleteCompTestCreator(BTC):
             TestCase(test_name=self.get_test_name(), case_desc="Invalid IP (comp -> sol)", com_path=com_other.get_uuid(), star_uuid=star_uuid, expected_status=401, base_host=sol.get_ip(), base_port=sol.get_port())
         ]
         self.add_test_cases(test_cases)
+        
+    # TODO: change this, when running against com_other
+    def runs_against(self) -> TestTarget:
+        return TestTarget.SOL
