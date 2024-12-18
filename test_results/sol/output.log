@@ -1,0 +1,8 @@
+18:14:55,364 broadcast/src/broadcast_to_postman_environment.py INFO broadcast ip specified: 172.99.255.255
+18:14:55,364 broadcast/src/broadcast_to_postman_environment.py INFO broadcast port specified: 172.99.255.255
+18:14:55,367 broadcast/src/broadcast_to_postman_environment.py INFO Sending HELLO? on 172.99.0.100:9042
+18:14:56,367 broadcast/src/broadcast_to_postman_environment.py INFO Received message from ('172.99.0.2', 9042): {"star":"7FDA07D0FC487CAF492B22200FBA7292","sol":8638,"comUuid":7697,"com-tcp":9042,"com-ip":"172.99.0.2"}
+18:14:56,370 broadcast/src/broadcast_to_postman_environment.py INFO Finished Broadcast
+18:14:56,449 __main__ INFO Reading environment file: broadcast/resources/test_environment.postman_environment.json
+18:14:56,449 __main__ INFO Generating testcases for sol
+18:14:56,450 __main__ INFO Successfully generated csv test cases for sol

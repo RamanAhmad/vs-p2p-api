@@ -2,9 +2,9 @@
 	"info": {
 		"_postman_id": "6e3de2e9-ba09-4816-ba46-4ec6cef1838f",
 		"name": "Peer2Peer API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23100563",
-		"_collection_link": "https://vs-starteam.postman.co/workspace/Team-Workspace~01d6b382-1387-40ea-8495-538c2634f4a0/collection/23100563-6e3de2e9-ba09-4816-ba46-4ec6cef1838f?action=share&source=collection_link&creator=23100563"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39484978",
+		"_collection_link": "https://vs-starteam.postman.co/workspace/Team-Workspace~01d6b382-1387-40ea-8495-538c2634f4a0/collection/23100563-6e3de2e9-ba09-4816-ba46-4ec6cef1838f?action=share&source=collection_link&creator=39484978"
 	},
 	"item": [
 		{
@@ -59,23 +59,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_SELF_UUID}}\",\r\n    \"com-ip\": \"{{COM_SELF_IP}}\",\r\n    \"com-tcp\": \"{{COM_SELF_TCP}}\",\r\n    \"status\": \"{{OK}}\"\r\n}",
+							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": {{SOL_UUID}},\r\n    \"component\": {{COM_SELF_UUID}},\r\n    \"com-ip\": \"{{COM_SELF_IP}}\",\r\n    \"com-tcp\": {{COM_SELF_TCP}},\r\n    \"status\": \"{{OK}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base_url}}/system/",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"system",
-								""
-							]
-						},
+						"url": "{{base_url}}/system/",
 						"description": "### Register with SOL\n\nThis endpoint allows you to register a component with SOL by making an HTTP POST.\n\n#### Request Body\n\n- `star`: STAR-UUID of the star.\n    \n- `sol`: COM-UUID of SOL.\n    \n- `component`: COM-UUID of the registering component.\n    \n- `com-ip`: IP address of the registering component.\n    \n- `com-tcp`: PORT at the registering component for the tcp connection.\n    \n- `status`: STATUS of the register process. Default: 200.\n    \n\n#### Response\n\nThe response format is `text/plain` with the following possible response codes:\n\n- 200: OK\n    \n- 401: Unauthorized: mismatching information about the star\n    \n- 403: No room left | Forbidden: Star is full\n    \n- 409: Conflict: mismatching information about the registering component\n    \n\nThe response text itself is always empty."
 					},
 					"response": []
@@ -247,7 +238,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": \"{{SOL_UUID}}\",\r\n    \"component\": \"{{COM_OTHER_UUID}}\",\r\n    \"com-ip\": \"{{COM_OTHER_IP}}\",\r\n    \"com-tcp\": \"{{COM_OTHER_TCP}}\",\r\n    \"status\": \"{{STATUS}}\"\r\n}",
+							"raw": "{\r\n    \"star\": \"{{STAR_UUID}}\",\r\n    \"sol\": {{SOL_UUID}},\r\n    \"component\": {{COM_SELF_UUID}},\r\n    \"com-ip\": \"{{COM_SELF_IP}}\",\r\n    \"com-tcp\": {{COM_SELF_TCP}},\r\n    \"status\": {{STATUS}}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -266,7 +257,7 @@
 							"variable": [
 								{
 									"key": "COM_UUID",
-									"value": "{{COM_PATH}}"
+									"value": "{{COM_SELF_UUID}}"
 								}
 							]
 						},
@@ -333,279 +324,11 @@
 							"variable": [
 								{
 									"key": "COM_UUID",
-									"value": "{{COM_PATH}}"
+									"value": "{{COM_SELF_UUID}}"
 								}
 							]
 						},
 						"description": "### DELETE component from star\n\nThis endpoint allows a component to unregister itself from a star. It can also be used by SOL to remove a specific component.\n\n#### Path Variables\n\n- `COM-UUID`: COM-UUID of the component to be unregistered.\n    \n\n#### Request Parameters\n\n- `star`: STAR-UUID of the star.\n    \n\n#### Response\n\nThe response format is `text/plain`, where the text is always empty. If the request is being sent **from a component to SOL**, the following response codes are valid:\n\n- `200`: OK: Component successfully removed from the star.\n    \n- `401`: Unauthorized: Invalid IP of requesting component and/or unknown/wrong STAR-UUID.\n    \n- `404`: Not Found: Component not known by SOL.\n    \n\nIf instead the request is being sent from SOL to a component, these responses are valid:\n\n- `200`: OK: Component successfully removed from the star.\n    \n- `401`: Unauthorized: Invalid IP of requesting SOL and/or unknown/wrong STAR-UUID."
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "messages",
-			"item": [
-				{
-					"name": "create message",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var status = pm.response.code;\r",
-									"var validStatus = [200, 401, 404, 412];\r",
-									"\r",
-									"pm.test(\"Valid response status code\", function (){\r",
-									"    pm.expect(validStatus).to.include(status);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content Type is text/plain\", function () {\r",
-									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain\");\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"star\":\"<STAR-UUID>\",\r\n    \"origin\": \"<COM-UUID> | <EMAIL>\",\r\n    \"sender\": \"<COM-UUID> | <EMAIL>\",\r\n    \"msg-id\": \"<MSG-UUID> | <EMAIL>\",\r\n    \"version\": \"1 | <EMAIL>\",\r\n    \"created\": \"<TIMESTAMP>\",\r\n    \"changed\": \"<TIMESTAMP>\",\r\n    \"subject\": \"<STRING>\",\r\n    \"message\":\"<STRING>\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/messages/:msg_uuid",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"messages",
-								":msg_uuid"
-							],
-							"variable": [
-								{
-									"key": "msg_uuid",
-									"value": "<MSG-UUID>"
-								}
-							]
-						},
-						"description": "### Create message\n\nThis endpoint creates or forwards a message to SOL for storage and distribution.\n\n#### Path Variables\n\n- `msg_uuid`: MSG-UUID for the message. If omitted or empty, SOL generates a unique MSG-UUID.\n    \n\n#### Request Body\n\n- `star`: STAR-UUID of the star.\n    \n- `origin`: COM-UUID or email address of the origin of the message. Can not be empty.\n    \n- `sender`: COM-UUID of the sender. Can be empty.\n    \n- `msg-id`: Per default empty, but setting a MSG-UUID is possible.\n    \n- `version`: Message version. May be empty.\n    \n- `created`: TIMESTAMP indicating when the message was created.\n    \n- `changed`: TIMESTAMP indicating the last change to the message.\n    \n- `subject`: Message subject as a UTF-8 string, truncated at the first newline. Can not be empty.\n    \n- `message`: Content of the message as a UTF-8 string.\n    \n\n#### Response\n\nThe response format is `text/plain` with the following possible response codes:\n\n- `200`: OK: Message accepted.\n    \n- `401`: Unauthorized: The component is not part of the star or wrong STAR-UUID.\n    \n- `404`: Already Exists: A message with the given MSG-UUID already exists.\n    \n- `412`: Precondition Failed: Invalid data format or missing origin or empty subject.\n    \n\nThe text is always empty."
-					},
-					"response": []
-				},
-				{
-					"name": "delete message",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var status = pm.response.code;\r",
-									"var validStatus = [200, 401, 404];\r",
-									"\r",
-									"pm.test(\"Valid response status code\", function (){\r",
-									"    pm.expect(validStatus).to.include(status);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content Type is text/plain\", function () {\r",
-									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain\");\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/messages/:msg_uuid?star=<STAR-UUID>",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"messages",
-								":msg_uuid"
-							],
-							"query": [
-								{
-									"key": "star",
-									"value": "<STAR-UUID>"
-								}
-							],
-							"variable": [
-								{
-									"key": "msg_uuid",
-									"value": "<MSG-UUID>"
-								}
-							]
-						},
-						"description": "### DELETE message content\n\nThis endpoint deletes a message within the specified star.\n\n#### Path Variables\n\n- `msg_uuid`: MSG-UUID of the message to delete.\n    \n\n#### Request Parameters\n\n- `star`: STAR-UUID of the star.\n    \n\n#### Response\n\nThe response format is `text/plain` with the following possible response codes:\n\n- `200`: OK: Message successfully deleted.\n    \n- `401`: Unauthorized: The component is not part of the star or wrong STAR-UUID.\n    \n- `404`: Not Found: Message does not exist in the specified star OR empty MSG-UUID."
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var status = pm.response.code;\r",
-									"var validStatus = [200, 401];\r",
-									"var messageKey = \"messages\";\r",
-									"var totalResultsKey = \"totalResults\";\r",
-									"var validKeys = ['star', totalResultsKey, 'scope', 'view', messageKey];\r",
-									"var validMessageKeys = {\r",
-									"    \"active\": ['msg-id', 'version', 'status', 'origin', 'created', 'changed', 'subject', 'message'],\r",
-									"    \"deleted\": ['msg-id', 'status']\r",
-									"}\r",
-									"\r",
-									"pm.test(\"Valid response status code\", function (){\r",
-									"    pm.expect(validStatus).to.include(status);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content Type is application/json\", function () {\r",
-									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"// get body\r",
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"\r",
-									"// TEST 3 - 7: valid content format\r",
-									"if (status === 200) {\r",
-									"    var keys = Object.keys(jsonData);\r",
-									"\r",
-									"    // TEST 3: only legal keys\r",
-									"    pm.test(\"Response contains all and only valid keys\", function () {\r",
-									"        pm.expect(keys.length).to.equal(validKeys.length);\r",
-									"        keys.forEach(function(key) {\r",
-									"            pm.expect(jsonData[key]).to.be.oneOf(validKeys);\r",
-									"        });\r",
-									"    });\r",
-									"\r",
-									"    // TEST 4: no empty values\r",
-									"    pm.test(\"All response keys except message key have non-empty values\", function () {\r",
-									"        Object.keys(jsonData).filter(key => key !== messageKey).forEach(function(key) {\r",
-									"            pm.expect(jsonData[key]).to.not.be.empty;\r",
-									"        });\r",
-									"    });\r",
-									"\r",
-									"    // TEST 5: totalResults key value is a number\r",
-									"    pm.test(\"TotalResults key value is a number\", function () {\r",
-									"        pm.expect(jsonData.totalResults).to.be.a('number');\r",
-									"    });\r",
-									"\r",
-									"    // TEST 6\r",
-									"    pm.test(\"Messages count matches totalResults\", function () {\r",
-									"        pm.expect(jsonData.messages).to.have.lengthOf(jsonData.totalResults);\r",
-									"    });\r",
-									"\r",
-									"    // TEST 7: messages fit format\r",
-									"    if (jsonData.messages.length > 0) {\r",
-									"        pm.test(\"Message objects match specific design\", function () {\r",
-									"            jsonData.messages.forEach(function (message) {\r",
-									"                pm.expect(message.status).to.be.oneOf(Object.keys(validMessageKeys));\r",
-									"                var msgKeys = Object.keys(message);\r",
-									"                if (message.status === \"active\") {\r",
-									"                    pm.expect(msgKeys).to.have.members(validMessageKeys.active)\r",
-									"                } else {\r",
-									"                    pm.expect(msgKeys).to.have.members(validMessageKeys.deleted)\r",
-									"                }\r",
-									"            });\r",
-									"        });\r",
-									"    }\r",
-									"}"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/messages?star=<STAR-UUID>&scope=<SCOPE>&info=<INFO>",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"messages"
-							],
-							"query": [
-								{
-									"key": "star",
-									"value": "<STAR-UUID>"
-								},
-								{
-									"key": "scope",
-									"value": "<SCOPE>",
-									"description": "<active> (default) | <all>"
-								},
-								{
-									"key": "info",
-									"value": "<INFO>",
-									"description": "<id> (default) | <header>"
-								}
-							]
-						},
-						"description": "### GET all messages\n\nThis endpoint retrieves a list of messages from the star.\n\n#### Request Parameters\n\n- `star`: STAR-UUID of the star.\n    \n- `scope`: Scope of retrieval. Possible values:\n    \n    - `active` (default): Retrieve only active messages.\n        \n    - `all`: Include metadata of deleted messages.\n        \n- `info`: Level of detail. Possible values:\n    \n    - `id` (default): Retrieve only message IDs.\n        \n    - `header`: Retrieve additional metadata (e.g., subject, timestamps).\n        \n\n#### Response\n\nThe response format is `application/json` with the following structure:\n\n- `star`: STAR-UUID of the star.\n    \n- `totalResults`: Number of results.\n    \n- `scope`: The requested scope (`active` or `all`).\n    \n- `view`: Level of detail (`id` or `header`).\n    \n- `messages`: Array of message objects.\n    \n\nA message object consists of the following key-value pairs:\n\n- `msg-id`:\n    \n- `version`: “1” (if active)\n    \n- `status`: “active” | \"deleted\"\n    \n- `origin`: (if active)\n    \n- `created`: TIMESTAMP (if active)\n    \n- `changed`: TIMESTAMP (if active)\n    \n- `subject`: (if active)\n    \n- `message`: (if active)\n    \n\nPossible response codes:\n\n- `200`: OK: List of messages retrieved successfully.\n    \n- `401`: Unauthorized: The component is not part of the star."
-					},
-					"response": []
-				},
-				{
-					"name": "get message by id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"  pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/messages/:msg_uuid?star=<STAR-UUID>",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"messages",
-								":msg_uuid"
-							],
-							"query": [
-								{
-									"key": "star",
-									"value": "<STAR-UUID>"
-								}
-							],
-							"variable": [
-								{
-									"key": "msg_uuid",
-									"value": "<MSG-UUID>"
-								}
-							]
-						},
-						"description": "### GET message by MSG-UUID\n\nThis endpoint retrieves details of a specific message by its MSG-UUID. If the message was deleted, the responses' messages-array contains only the `mss-uuid` and the `status` is `deleted`.\n\n#### Path Variables\n\n- `msg_uuid`: MSG-UUID of the message to retrieve.\n    \n\n#### Request Parameters\n\n- `star`: STAR-UUID of the star.\n    \n\n#### Response\n\nThe response format is `application/json` with the following structure:\n\n- `star`: STAR-UUID of the star.\n    \n- `totalResults`: 0, if no message was found, else 1.\n    \n- `messages`: Array containing the message object.\n    \n\nA message object consists of the following key-value pairs:\n\n- `msg-id`: MSG-UUID\n    \n- `version`: “1” (if active)\n    \n- `status`: “active” | \"deleted\"\n    \n- `origin`: COMPONENT-UUID (if active)\n    \n- `created`: TIMESTAMP (if active)\n    \n- `changed`: TIMESTAMP (if active)\n    \n- `subject`: STRING (if active)\n    \n- `message`: STRING (if active)\n    \n\nPossible response codes:\n\n- `200`: OK: Message retrieved successfully.\n    \n- `401`: Unauthorized: The component is not part of the star or wrong STAR-UUID.\n    \n- `404`: Not Found: Message does not exist."
 					},
 					"response": []
 				}

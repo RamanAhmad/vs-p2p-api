@@ -1,4 +1,5 @@
 import logging
+import os
 import socket
 import sys
 from time import sleep
@@ -6,7 +7,7 @@ import json
 
 port = 8013
 broadcast_ip = "172.17.255.255"
-file="resources/test_environment.postman_environment.json"
+file="broadcast/resources/test_environment.postman_environment.json"
 msg="HELLO?"
 
 def get_module_logger(mod_name):
@@ -33,6 +34,8 @@ def send_and_receive_broadcast():
         sock.settimeout(5.0)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         sock.bind((ip,port))
+        print(broadcast_ip)
+        print(type(broadcast_ip))
         sock.sendto(msg.encode(), (broadcast_ip, port))
         sleep(1)
         data, addr = sock.recvfrom(1024)
@@ -56,19 +59,22 @@ def write_values_to_environment_file(values, own_ip):
         environment = json.load(json_file)
         environment_values = environment["values"]
         environment_values = insertValue(environment_values, "COM_SELF_IP", own_ip)
+
         for key, value in values.items():
             if key.lower() == "star":
                 environment_values = insertValue(environment_values,"STAR_UUID",value)
             elif key.lower() == "sol":
                 environment_values = insertValue(environment_values,"SOL_UUID",value)
-            elif key.lower() == "component":
+            elif key.lower() == "component" or key.lower() == "comuuid":
                 environment_values = insertValue(environment_values,"COM_SELF_UUID",value)
-                environment_values = insertValue(environment_values,"COM_OTHER_UUID",value)
-            elif key.lower() == "sol-ip":
+            elif key.lower() == "sol-ip" or key.lower() == "com-ip":
                 environment_values = insertValue(environment_values,"SOL_IP",value)
-            elif key.lower() == "sol-tcp":
+            elif key.lower() == "sol-tcp" or key.lower() == "com-tcp":
                 environment_values = insertValue(environment_values,"port",value)
-                environment_values = insertValue(environment_values,"SOL_TCP",str(value))
+                environment_values = insertValue(environment_values,"SOL_TCP",value)
+                environment_values = insertValue(environment_values,"COM_SELF_TCP",value)
+                environment_values = insertValue(environment_values,"COM_OTHER_TCP",value)
+
             environment_values.append({"key":key, "value":value, "type":"default", "enabled":True})
         environment["values"] = environment_values
     return environment
@@ -80,17 +86,29 @@ def insertValue(values, key, value):
     return values    
 
 if __name__ == "__main__":
+    logger = get_module_logger(sys.argv[0])
     try:
         broadcast_ip = sys.argv[1]
+        logger.info(f'broadcast ip specified: {broadcast_ip}')        
+
     except:
         logger.warning(f'No broadcast ip specified, using {broadcast_ip}')        
         
     try:
         port = int(sys.argv[2])
+        logger.info(f'broadcast port specified: {broadcast_ip}')        
+
     except:
         logger.warning(f'No broadcast port specified, using {port}')             
-    
-    isSuccess = send_and_receive_broadcast()    
+    try:
+        isSuccess = send_and_receive_broadcast()   
+    except Exception as e:
+        exc_type, _, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        msg = "Broadcast failed"
+        logger.warning(msg, e, exc_type, fname, exc_tb.tb_lineno)
+        raise Exception(msg)
+        
     logger.info('Finished Broadcast')  
     if not isSuccess:
         logger.warning('Failed')

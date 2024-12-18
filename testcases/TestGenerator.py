@@ -61,8 +61,7 @@ class TestGenerator:
         if not exists(TestGenerator.BASE_DIR) or not isdir(TestGenerator.BASE_DIR):
             makedirs(TestGenerator.BASE_DIR)
         file_path = join(TestGenerator.BASE_DIR, TestGenerator.FILE_NAME)
-        if target != TestTarget.ALL:
-            file_path = file_path.replace(".csv", f"_against_{target.value.lower()}.csv")
+
         with open(file_path, "w") as file:
             file.write(",".join(TestCase.get_column_names()) + "\n")
             for creator in creators:

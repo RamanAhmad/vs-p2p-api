@@ -17,6 +17,8 @@ class HeartBeatTestCreator(BTC):
         sol: Component = self.get_sol()
         star_uuid = self.get_star_uuid()
         com_self: Component = self.get_components()[0]
+        com_other: Component = self.get_components()[1]
+
         name = self.get_test_name()
         
         test_cases = [

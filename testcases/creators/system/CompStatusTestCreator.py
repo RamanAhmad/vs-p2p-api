@@ -19,7 +19,7 @@ class CompStatusTestCreator(BTC):
         self.get_components()[0]
         
         test_cases = [
-            TestCase(test_name=self.get_test_name(), case_desc="Valid and active component", expected_status=200, com_path=com_other.get_uuid(), star_uuid=star_uuid, base_host=com_other.get_ip(), base_port=com_other.get_port()),
+            TestCase(test_name=self.get_test_name(), case_desc="Valid and active component", expected_status=200, com_path=com_other.get_uuid(), star_uuid=star_uuid, base_host=com_other.get_ip(), base_port=com_other.get_port(),com_other = com_other),
             TestCase(test_name=self.get_test_name(), case_desc="Component not part of the star", expected_status=401, com_path=com_other.get_uuid(), star_uuid=BTC.FAKE_STAR_UUID, base_host=com_other.get_ip(), base_port=com_other.get_port()),
             TestCase(test_name=self.get_test_name(), case_desc="Empty com uuid in path", expected_status=401, com_path="", star_uuid=star_uuid, base_host=com_other.get_ip(), base_port=com_other.get_port()),
             TestCase(test_name=self.get_test_name(), case_desc="Mismatchin com uuid", expected_status=409, com_path=BTC.FAKE_UUID, star_uuid=star_uuid, base_host=com_other.get_ip(), base_port=com_other.get_port())
