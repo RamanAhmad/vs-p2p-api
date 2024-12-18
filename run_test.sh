@@ -1,4 +1,6 @@
 #!/bin/sh
+#ARG 1: port
+#ARG 2: target ("sol" or "com")
 port=$1
 target=$2
 ip=172.99.0.100
