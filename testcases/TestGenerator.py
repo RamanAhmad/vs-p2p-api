@@ -67,8 +67,7 @@ class TestGenerator:
     
 def main ():
     try:        
-        
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), argv[1])
+        file_path = os.path.join(argv[1])
 
         with open(file_path) as file:
             environment = json.loads(file.read())
@@ -108,22 +107,31 @@ def main ():
         exc_type, _, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         logger.warning(e, exc_type, fname, exc_tb.tb_lineno)
-        logger.warning("No valid environment file path given, using default values")        
-        sol = Component("1014", "102.0.0.4", "8012")
-        comp_self = Component("1015", "102.0.0.5", "8013")
-        star_uuid = "11111111122222222222223333333332"    
-        comp_other = Component("1016", "102.0.0.6", "8014")
+        msg = "No valid environment file path given"
+        logger.warning(msg)        
+        raise Exception(msg)
+
 
     generator = TestGenerator(star_uuid, sol, [comp_self, comp_other])
+    
+    logger.info("Generating testcases for " + argv[2])
         
-    # Add your creators here like below
+    # if (argv[2].strip().lower() == "sol"):
+    #     #only sol testcases
+    # elif (argv[2].strip().lower() == "com"):
+    #     #only com testcases
+    # else:
+    #     msg = "Specify test: \"sol\" or \"com\""
+    #     logger.warning(msg)
+    #     raise Exception(msg) 
+    
     RegisterTestCreator(generator)
     HeartBeatTestCreator(generator)
     CompStatusTestCreator(generator)
-    DeleteCompTestCreator(generator)    
+    DeleteCompTestCreator(generator)
     
     generator.export_to_csv() 
-    logger.info("Successfully generated csv test cases")       
+    logger.info("Successfully generated csv test cases for " + argv[2])       
 
 if __name__ == "__main__":
     main()
