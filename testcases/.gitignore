@@ -193,3 +193,4 @@ pyrightconfig.json
 .ionide
 
 out/
+test_results/
