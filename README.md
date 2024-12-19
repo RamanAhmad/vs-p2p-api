@@ -1,84 +1,95 @@
 # Peer2Peer API Testing
 
 ## Übersicht
-Dieses Repository wurde für die Praktikumsaufgabe **Peer2Peer** im Rahmen des Moduls **Verteilte Systeme (VS)** an der **HAW Hamburg** erstellt. Dies enthält eine Sammlung von Skripten und einer Postman-Collection-Datei, um die Peer2Peer API zu testen.
-
-Hier werden drei verschiedene Methoden beschrieben, wie man die API testen kann:
-
-## 1. Manuelles Testen mit Postman
-### Voraussetzung
-
-**Postman-Installation**
-
-  - Gehe auf die [offizielle Postman-Website](https://www.postman.com/downloads/)
-  - Lade die Version für dein Betriebssystem herunter
-  - Installationsanweisungen folgen
+Dieses Repository wurde für die Praktikumsaufgabe **Peer-to-Peer** im Rahmen des Moduls **Verteilte Systeme (VS)** an der **HAW Hamburg** erstellt. Dies enthält eine Sammlung von Skripten, die dafür zuständig sind, die Sol- und Komponenten-Kommunikation für ein P2P-System in Docker-Containern zu starten und API-Tests durchzuführen.
 
 
-### Collection in Postman importieren
+## Repository-Struktur
 
-  - Öffne Postman
-  - Klicke im oberen linken Bereich auf *Import*
-  - Wähle im Pop-up-Fenster File aus
-  - Wähle die Datei [Peer2Peer_API_Collection.json](vs-p2p-api\p2p-postman-collection) aus und klicke auf *Open*
-
-
-### Einrichten von Umgebungsvariablen
-> **Hinweis:** Die Umgebungsvariablen können direkt in den API-Requests geändert werden. Es wird jedoch empfohlen, **Umgebungsvariablen** in Postman zu verwenden, um die Stabilität zu gewährleisten.
-
-Für das manuelle Testen müssen die Umgebungsvariablen in Postman eingerichtet werden. Diese Variablen werden in den API-Anfragen verwendet, um dynamische Werte zu ersetzen, z.B. die UUIDs von Komponenten, IP-Adressen und etc.
-
-**Umgebungsvariablen:**
-- `COM_1_UUID`: UUID der ersten Komponente
-- `COM_2_UUID`: UUID der zweiten Komponente
-- `STAR_1_UUID`: UUID des Stars
-- `COM_1_IP`: IP-Adresse der ersten Komponente
-- `COM_2_IP`: IP-Adresse der zweiten Komponente
-- `COM_2_TCP`: TCP-Port der zweiten Komponente
-- `STATUS_OK`: Erfolgreicher Statuscode
+- **Dockerfile**: Docker-Konfiguration für die Erstellung des Images.
+- **run_sol.sh**: Skript zum Starten der **Sol-Umgebung**.
+- **run_com.sh**: Skript zum Starten der **Komponenten-Umgebung**.
+- **run_test.sh**: Skript zum Ausführen von API-Tests und Sammeln von Testergebnissen.
+- **broadcast/resources/test_environment.postman_environment.json**: JSON-Datei mit Umgebungsvariablen für Postman-Tests.
+- **test_results/**: Verzeichnis für die Testergebnisse.
 
 
+## Voraussetzung
 
-## 2. Testen mit automatisch generierten Umgebungsvariablen
-Diese Methode nutzt Skripte, die automatisch Umgebungsvariablen durch Broadcast-Nachrichten an Sol für die Postman-Tests/Collection generieren.
+<details>
+  <summary>Docker - Die Anwendung nutzt Docker-Container</summary>
+  https://www.docker.com/get-started
+</details>
 
-### Voraussetzungen
+<details>
+  <summary>Docker Daemon muss aktiv sein, um Container zu starten</summary>
+  Überprüfe, ob der Daemon läuft, mit `sudo systemctl status docker` (Linux) oder starte Docker Desktop (macOS/Windows).
+</details>
 
-- Deine Server-App läuft in einem Docker-Container.
-- Deine Server-App reagiert auf UDP-Broadcasts auf einem angegebenen Port mit einem JSON-formatierten String.
 
-### Ressourcen einrichten (optional für die neueste Umgebungsdatei)
+## Setup
 
-- Exportiere die Umgebungsdatei der Postman-Collection
-- Kopiere die Datei in das Verzeichnis `resources/`.
-- Benenne die Datei in `test_environment.postman_environment.json` um.
+### 1. Die P2P-Anwendung als Docker-Image bauen
+### 2. Skripte ausführbar machen
 
-## Skript ausführen
+ ```bash
+  chmod +x run_sol.sh run_com.sh run_test.sh
+ ```
 
-- Navigiere zu `broadcast\run.sh` und führe das folgende Kommando aus:
+### 3. Skript `run_sol.sh` mit der image_id der P2P-Anwendung starten
 
-    ```bash
-    .\run.sh <udp-port>
-    ```
+```bash
+  ./run_sol.sh <image_id>
+```
+
+### 4. Skript `run_com.sh` mit der image_id der P2P-Anwendung starten
+
+```bash
+  ./run_com.sh <image_id>
+```
+
+### 5. Die Umgebungsvariablen konfigurieren
+
+Zu der Datei `broadcast/resources/test_environment.postman_environment.json` gehen und die folgenden Werte anpassen:
+
+- `COM_OTHER_UUID`: UUID der aktiven Komponente.
+- `COM_OTHER_IP`: IP-Adresse der aktiven Komponente.
+- `COM_OTHER_TCP`: TCP-Port der aktiven Komponente.
+- `COM_PATH`: UUID der aktiven Komponente
+
+
+## Tests ausführen
+In diesem Abschnitt testen wir **Sol-Instanz** sowie die **Komponenten-Instanz**, die im Setup-Abschnitt gestartet wurden.
+
+### 1. Tests für die Sol-Instanz ausführen
+Führe das Skript `run_test.sh` aus, um die Tests für die Sol-Instanz zu starten:
+
+```bash
+ ./run_test.sh <port> sol
+```
+Ersetze `<port>` mit dem Port der **Sol-Instanz**.
+
+### 2. Tests für die Komponenten-Instanz ausführen
+Führe das Skript `run_test.sh` aus, um die Tests für die Komponenten-Instanz zu starten:
+
+```bash
+  ./run_test.sh <port> com
+```
+Ersetze `<port>` mit dem gewünschten Port für die **Komponenten-Instanz**.
 
 > **Hinweis:** Wenn du Windows verwendest, benutze das Cygwin- oder Git Bash-Terminal.
 
+## Testberichte
+Nach dem Ausführen der Tests kannst du die Ergebnisse in HTML-Dateien anzeigen. Die Testberichte befinden sich im Verzeichnis `test_results`.
 
-## 3. Vollautomatisiertes Testen
-Mit dieser Methode können alle Tests vollständig automatisch ausgeführt werden.
+- **Testberichte für die Sol-Instanz sind hier zu finden**:
 
-### Voraussetzungen
+	`
+  	test_results/sol/newman/<date>.html
+	`
 
+- **Testberichte für die Komponenten-Instanz sind hier zu finden**:
 
-- **[Docker](https://www.docker.com/get-started):** Deine Server-App sollte in einem Docker-Container laufen.
-- **[Python 3](https://www.python.org/downloads/):** Installiere Python 3, um die Testfälle auszuführen.
-
-## Skript ausführen
-
-- Führe das folgende Kommando aus:
-
-    ```bash
-    .\run.sh <udp-port>
-    ```
-
-> **Hinweis:** Ersetze <udp-port> durch den Port, auf dem der UDP-Broadcast gesendet werden soll.
+	`
+  	test_results/com/newman/<date>.html
+	`
