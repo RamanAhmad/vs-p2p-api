@@ -25,7 +25,7 @@ class RegisterTestCreator(BTC):
             TestCase(test_name=self.get_test_name(), case_desc="Mismatching IP for given COM_UUID", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com_self.get_modified_clone(new_ip=BTC.FAKE_IP), status=200),
             TestCase(test_name=self.get_test_name(), case_desc="Status in json is not 200", expected_status=409, star_uuid=star_uuid, sol=sol, com_self=com_self, status=BTC.FAKE_STATUS),
             TestCase(test_name=self.get_test_name(), case_desc="Unknown STAR_UUID in json", expected_status=401, star_uuid=BTC.FAKE_STAR_UUID, sol=sol, com_self=com_self, status=200),
-            TestCase(test_name=self.get_test_name(), case_desc="Mismatching SOL_UUID in json", expected_status=200, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_self=com_self, status=200)
+            TestCase(test_name=self.get_test_name(), case_desc="Mismatching SOL_UUID in json", expected_status=401, star_uuid=star_uuid, sol=sol.get_modified_clone(new_uuid=BTC.FAKE_UUID), com_self=com_self, status=200)
         ]
         self.add_test_cases(test_cases)
         
